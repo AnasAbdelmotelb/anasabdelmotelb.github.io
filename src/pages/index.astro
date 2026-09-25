@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Anas Mansour | Portfolio"
+  description="Anas Mansour, Computer Science Graduate & AI Enthusiast. Portfolio coming soon."
+>
+  <main>
+    <h1>Anas Mansour</h1>
+    <p class="tagline">Computer Science Graduate &amp; AI Enthusiast</p>
+    <p class="status">Portfolio coming soon.</p>
+  </main>
+</Layout>
+
+<style>
+  main {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.25rem, 8vw, 4rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .tagline {
+    margin: 0.75rem 0 0;
+    font-size: clamp(1.05rem, 3.5vw, 1.35rem);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .status {
+    margin: 1.5rem 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+</style>
