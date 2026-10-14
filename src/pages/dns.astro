@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="How DNS Helps My Portfolio Load | Anas Mansour"
+  description="A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records."
+>
+  <article class="note container">
+    <p class="back"><a href="/#writing">← Back to Writing &amp; Technical Notes</a></p>
+    <p class="eyebrow">Technical note</p>
+    <h1>How DNS Helps My Portfolio Load</h1>
+
+    <section aria-labelledby="dns-what">
+      <h2 id="dns-what">1. What is DNS?</h2>
+      <p>
+        DNS stands for Domain Name System. I think of it as an address book for the internet. When I type
+        <code>anasabdelmotelb.github.io</code> into my browser, my computer needs to find the correct address
+        for the website. DNS helps it find that address.
+      </p>
+    </section>
+
+    <section aria-labelledby="dns-resolver">
+      <h2 id="dns-resolver">2. What does the Resolver do?</h2>
+      <p>
+        The recursive resolver looks for the DNS information needed to reach the website. First, it checks if
+        the answer is already saved in its cache. If the answer is not available or has expired, it looks for
+        the information by asking other DNS servers.
+      </p>
+    </section>
+
+    <section aria-labelledby="dns-nameserver">
+      <h2 id="dns-nameserver">3. What is a Nameserver?</h2>
+      <p>
+        DNS has different levels of nameservers. The resolver can start with a root nameserver, which directs
+        it to the correct top-level domain server, such as <code>.io</code>. The <code>.io</code> nameserver
+        then helps it find the authoritative nameserver for the domain. The authoritative nameserver provides
+        the DNS records for the requested hostname.
+      </p>
+    </section>
+
+    <section aria-labelledby="dns-record">
+      <h2 id="dns-record">4. What is a DNS Record and Response?</h2>
+      <p>
+        A DNS record stores information about a domain. For example, an A record connects a hostname to an
+        IPv4 address. My portfolio is hosted on GitHub Pages, and its DNS lookup returns GitHub Pages IP
+        addresses, including <code>185.199.108.153</code>, <code>185.199.109.153</code>,
+        <code>185.199.110.153</code>, and <code>185.199.111.153</code>.
+      </p>
+      <p>
+        After the resolver gets the answer, it returns the result to my computer. The browser can then connect
+        to the website using HTTPS. DNS records also have a TTL (Time to Live), which controls how long the
+        answer can stay in the cache before it needs to be checked again.
+      </p>
+    </section>
+
+    <section aria-labelledby="dns-cname">
+      <h2 id="dns-cname">5. What is a CNAME?</h2>
+      <p>
+        A CNAME record points one hostname to another hostname instead of directly storing an IP address. For
+        example, if I use a custom subdomain such as <code>portfolio.example.com</code> in the future, I could
+        configure a CNAME record pointing it to <code>anasabdelmotelb.github.io</code>, following GitHub Pages'
+        configuration requirements.
+      </p>
+      <p>
+        I currently use my GitHub Pages address, so this CNAME example explains a possible future setup, not a
+        custom domain I have already configured.
+      </p>
+    </section>
+
+    <section aria-labelledby="dns-conclusion">
+      <h2 id="dns-conclusion">Conclusion</h2>
+      <p>
+        DNS is important because it helps my browser find the server for a website by using its domain name.
+        The resolver finds the answer, nameservers help provide the correct records, and the browser uses the
+        returned address to connect to the website. Caching and TTL help make future lookups more efficient.
+      </p>
+    </section>
+  </article>
+</Layout>
+
+<style>
+  .note {
+    max-width: 46rem;
+    padding-top: clamp(2rem, 6vw, 3.5rem);
+  }
+
+  .back {
+    margin: 0 0 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 7vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  h2 {
+    margin: 2.25rem 0 0.75rem;
+    font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    margin: 0 0 1rem;
+  }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.9em;
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    background: var(--accent-soft);
+    overflow-wrap: anywhere;
+  }
+</style>

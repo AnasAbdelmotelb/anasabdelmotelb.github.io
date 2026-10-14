@@ -1,47 +1,493 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const linkedIn = 'https://www.linkedin.com/in/anas-mansour-b17302251/';
+const gitHub = 'https://github.com/AnasAbdelmotelb';
+const booking = 'https://cal.com/anas-mansour/intro-call';
+
+const skillGroups = [
+  {
+    title: 'AI & Machine Learning',
+    items: [
+      'Python',
+      'Scikit-learn',
+      'Machine Learning',
+      'NLP',
+      'Text Preprocessing',
+      'TF-IDF',
+      'Model Evaluation (Accuracy, Precision, Recall, F1)',
+    ],
+  },
+  {
+    title: 'LLMs & AI Automation',
+    items: [
+      'Anthropic Claude',
+      'LLM Workflow Design',
+      'Prompt Engineering',
+      'Structured JSON Outputs',
+      'Source-Grounded Generation',
+      'Human-in-the-Loop Review',
+      'Make.com',
+    ],
+  },
+  {
+    title: 'Data & Integrations',
+    items: [
+      'JSON Parsing',
+      'Regex',
+      'HTTP Requests',
+      'Jina Reader',
+      'Markdown-to-HTML Conversion',
+      'Google Sheets',
+      'Google Docs',
+    ],
+  },
+  {
+    title: 'Programming & Databases',
+    items: ['Java', 'SQL', 'Oracle Database'],
+  },
+];
 ---
 
 <Layout
-  title="Anas Mansour | Portfolio"
-  description="Anas Mansour, Computer Science Graduate & AI Enthusiast. Portfolio coming soon."
+  title="Anas Mansour | AI Engineer"
+  description="Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning."
 >
-  <main>
-    <h1>Anas Mansour</h1>
-    <p class="tagline">Computer Science Graduate &amp; AI Enthusiast</p>
-    <p class="status">Portfolio coming soon.</p>
-  </main>
+  <section class="hero container" aria-labelledby="hero-title">
+    <p class="eyebrow">AI Engineer · AI Automation Engineer</p>
+    <h1 id="hero-title">Anas Mansour</h1>
+    <p class="lead">
+      Backend AI Engineer Intern at FlyRank AI, designing and validating multi-step LLM workflows.
+      Computer Science and Artificial Intelligence graduate with First Class Honours.
+    </p>
+    <div class="hero-actions">
+      <a class="cv-button" href="/cv.pdf" download="Anas_Abdelmotelb_CV.pdf" type="application/pdf">
+        Download CV <span class="cv-meta">(PDF, 45&nbsp;KB)</span>
+      </a>
+      <a class="button-secondary" href={booking} rel="noopener noreferrer" target="_blank">
+        Book a Call<span class="visually-hidden"> (opens in a new tab)</span>
+      </a>
+      <a class="button-secondary" href={linkedIn} rel="me noopener" target="_blank">LinkedIn</a>
+      <a class="button-secondary" href={gitHub} rel="me noopener" target="_blank">GitHub</a>
+    </div>
+  </section>
+
+  <section id="about" class="section container" aria-labelledby="about-title">
+    <h2 id="about-title"><span class="section-index">01</span> About</h2>
+    <div class="prose">
+      <p>
+        I am a Computer Science and Artificial Intelligence graduate with First Class Honours, currently
+        working as a Backend AI Engineer Intern at FlyRank AI. My work focuses on designing, debugging and
+        validating multi-step LLM workflows: passing structured JSON between stages, grounding output in
+        the supplied sources, and keeping a human in the loop for review.
+      </p>
+      <p>
+        My foundation is in Python, Scikit-learn and NLP for machine-learning model development and
+        evaluation, which I applied in SpotFake, a text-based fake news detection system built as a
+        university team project.
+      </p>
+    </div>
+    <dl class="facts">
+      <div>
+        <dt>Education</dt>
+        <dd>
+          Bachelor's Degree, Computer Science and Artificial Intelligence (First Class Honours),
+          University of Hertfordshire Programme (GAF), Cairo
+        </dd>
+      </div>
+      <div>
+        <dt>Current role</dt>
+        <dd>Backend AI Engineer Intern, FlyRank AI</dd>
+      </div>
+      <div>
+        <dt>Location</dt>
+        <dd>Cairo, Egypt</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="skills" class="section container" aria-labelledby="skills-title">
+    <h2 id="skills-title"><span class="section-index">02</span> Technical Skills</h2>
+    <div class="skill-grid">
+      {skillGroups.map((group) => (
+        <div class="card">
+          <h3>{group.title}</h3>
+          <ul class="tags">
+            {group.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="experience" class="section container" aria-labelledby="experience-title">
+    <h2 id="experience-title"><span class="section-index">03</span> Experience</h2>
+    <article class="card">
+      <header class="item-header">
+        <div>
+          <h3>Backend AI Engineer Intern</h3>
+          <p class="item-org">FlyRank AI · Cairo, Egypt</p>
+        </div>
+        <p class="item-date">Jul 2026 – Present</p>
+      </header>
+      <ul class="bullets">
+        <li>
+          Designed and built a four-stage LLM research workflow in Make.com that turns a question and 2–5
+          documentation URLs into a cited technical brief.
+        </li>
+        <li>
+          Applied prompt engineering to step-specific Anthropic Claude calls, passing a structured JSON fact
+          sheet between stages to ground the brief in the supplied sources.
+        </li>
+        <li>
+          Built an automated review stage that checks claims against the fact sheet, followed by mandatory
+          human-in-the-loop review in Google Sheets.
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="projects" class="section container" aria-labelledby="projects-title">
+    <h2 id="projects-title"><span class="section-index">04</span> Selected Projects</h2>
+    <div class="project-grid">
+      <article class="card">
+        <p class="item-kicker">FlyRank AI</p>
+        <h3>Tech Docs Research Workflow</h3>
+        <p>
+          A multi-stage LLM automation that converts a question and a set of documentation URLs into a
+          cited technical brief published to Google Docs.
+        </p>
+        <ol class="pipeline" aria-label="Workflow stages">
+          <li>Gather</li>
+          <li>Synthesize</li>
+          <li>Draft</li>
+          <li>Review &amp; Format</li>
+        </ol>
+        <ul class="bullets">
+          <li>Fetches documentation as clean text via HTTP requests to Jina Reader, with input validation and error handling for failed URLs.</li>
+          <li>Ties each fact to a source ID and verbatim quote, and removes unsupported statements in review.</li>
+          <li>Uses Regex and JSON parsing to extract model output and logs each step to a Google Sheets run log.</li>
+        </ul>
+        <ul class="tags">
+          <li>Make.com</li>
+          <li>Anthropic Claude</li>
+          <li>Prompt Engineering</li>
+          <li>Structured JSON</li>
+          <li>Human-in-the-Loop</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <p class="item-kicker">Graduation project</p>
+        <h3>SpotFake – Fake News Detection</h3>
+        <p>
+          A text-based fake news detection system built in Python with Scikit-learn and TF-IDF features.
+        </p>
+        <ul class="tags">
+          <li>Python</li>
+          <li>Scikit-learn</li>
+          <li>NLP</li>
+          <li>TF-IDF</li>
+        </ul>
+        <p><a href="#graduation-project">Read more about SpotFake</a></p>
+      </article>
+    </div>
+  </section>
+
+  <section id="graduation-project" class="section container" aria-labelledby="graduation-title">
+    <h2 id="graduation-title"><span class="section-index">05</span> Graduation Project</h2>
+    <article class="card">
+      <header class="item-header">
+        <div>
+          <h3>SpotFake – Fake News Detection</h3>
+          <p class="item-org">University team project · University of Hertfordshire</p>
+        </div>
+        <p class="item-date">Sep 2025 – May 2026</p>
+      </header>
+      <ul class="bullets">
+        <li>Developed a text-based fake news detection system in Python, training machine-learning models with Scikit-learn.</li>
+        <li>Applied NLP techniques, including text preprocessing and TF-IDF vectorization, to convert raw news text into numerical features.</li>
+        <li>Evaluated the models using Accuracy, Precision, Recall and F1-score.</li>
+        <li>Collaborated with team members to develop, test and present the final solution.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="writing" class="section container" aria-labelledby="writing-title">
+    <h2 id="writing-title"><span class="section-index">06</span> Writing &amp; Technical Notes</h2>
+    <div class="project-grid">
+      <article class="card">
+        <p class="item-kicker">Technical note</p>
+        <h3><a class="card-link" href="/dns/">How DNS Helps My Portfolio Load</a></h3>
+        <p>
+          How the resolver, nameservers, DNS records, the response, TTL and CNAME records work together when
+          a browser looks up this site.
+        </p>
+      </article>
+      <div class="card empty-state">
+        <p class="badge">Coming soon</p>
+        <p>More technical notes on LLM workflows and machine-learning projects will appear here.</p>
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <style>
-  main {
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 1rem;
-    text-align: center;
+  .hero {
+    padding-top: clamp(3rem, 10vw, 6rem);
+    padding-bottom: clamp(2rem, 6vw, 3.5rem);
+  }
+
+  .eyebrow {
+    margin: 0 0 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
   }
 
   h1 {
     margin: 0;
-    font-size: clamp(2.25rem, 8vw, 4rem);
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    font-size: clamp(2.5rem, 9vw, 4.25rem);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
   }
 
-  .tagline {
-    margin: 0.75rem 0 0;
-    font-size: clamp(1.05rem, 3.5vw, 1.35rem);
-    color: var(--accent);
+  .lead {
+    max-width: 40rem;
+    margin: 1.25rem 0 0;
+    font-size: clamp(1.05rem, 2.8vw, 1.25rem);
+    color: var(--muted);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .cv-button,
+  .button-secondary {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
     font-weight: 600;
+    text-decoration: none;
+    border: 2px solid var(--accent);
   }
 
-  .status {
+  .cv-button {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .cv-button:hover {
+    filter: brightness(1.1);
+  }
+
+  .cv-button:focus-visible,
+  .button-secondary:focus-visible {
+    outline: 3px solid var(--text);
+    outline-offset: 3px;
+  }
+
+  .cv-meta {
+    font-weight: 400;
+    opacity: 0.85;
+  }
+
+  .button-secondary {
+    color: var(--accent);
+    background: transparent;
+  }
+
+  .button-secondary:hover {
+    background: var(--accent-soft);
+  }
+
+  .section {
+    padding-top: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+    font-size: clamp(1.4rem, 4vw, 1.75rem);
+    letter-spacing: -0.02em;
+  }
+
+  .section-index {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  .prose {
+    max-width: 42rem;
+  }
+
+  .prose p {
+    margin: 0 0 1rem;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1rem;
     margin: 1.5rem 0 0;
+  }
+
+  .facts dt {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .facts dd {
+    margin: 0.25rem 0 0;
+  }
+
+  .card {
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .card > p {
+    margin: 0.75rem 0 0;
+  }
+
+  .card > p:first-child {
+    margin-top: 0;
+  }
+
+  .skill-grid,
+  .project-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .skill-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  }
+
+  .project-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tags li {
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    font-size: 0.85rem;
+  }
+
+  .item-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+  }
+
+  .item-org,
+  .item-date,
+  .item-kicker {
+    margin: 0.25rem 0 0;
     color: var(--muted);
     font-size: 0.95rem;
+  }
+
+  .item-date,
+  .item-kicker {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+
+  .item-kicker {
+    margin: 0 0 0.35rem;
+    color: var(--accent);
+  }
+
+  .bullets {
+    margin: 1rem 0 0;
+    padding-left: 1.25rem;
+  }
+
+  .bullets li + li {
+    margin-top: 0.4rem;
+  }
+
+  .pipeline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+  }
+
+  .pipeline li {
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+
+  .pipeline li + li::before {
+    content: '→ ';
+    color: var(--muted);
+  }
+
+  .card-link {
+    color: var(--text);
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
+  }
+
+  .card-link:hover {
+    color: var(--accent);
+  }
+
+  .empty-state {
+    border-style: dashed;
+  }
+
+  .card > .badge {
+    display: inline-block;
+    margin: 0 0 0.75rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+  }
+
+  .empty-state p:last-child {
+    margin: 0;
+    color: var(--muted);
   }
 </style>
