@@ -62,8 +62,16 @@ const booking = 'https://cal.com/anas-mansour/intro-call';
       <div class="container footer-inner">
         <p>&copy; {new Date().getFullYear()} Anas Mansour</p>
         <ul class="footer-links">
-          <li><a href={linkedIn} rel="me noopener" target="_blank">LinkedIn</a></li>
-          <li><a href={gitHub} rel="me noopener" target="_blank">GitHub</a></li>
+          <li>
+            <a href={linkedIn} rel="me noopener" target="_blank">
+              LinkedIn<span class="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          </li>
+          <li>
+            <a href={gitHub} rel="me noopener" target="_blank">
+              GitHub<span class="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          </li>
           <li><a href="/cv.pdf">CV (PDF)</a></li>
           <li>
             <a href={booking} rel="noopener noreferrer" target="_blank">
@@ -121,6 +129,13 @@ const booking = 'https://cal.com/anas-mansour/intro-call';
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+    }
+  }
+
+  /* On phones the header is not sticky, so anchors only need a small gap. */
+  @media (max-width: 720px) {
+    html {
+      scroll-padding-top: 1rem;
     }
   }
 
@@ -240,7 +255,14 @@ const booking = 'https://cal.com/anas-mansour/intro-call';
     text-decoration: none;
   }
 
-  @media (max-width: 640px) {
+  /* Below ~720px the name, seven links and CV no longer fit on one row, so
+     the nav moves to its own row. The header also stops being sticky here:
+     on a phone it would otherwise cover ~11% of the screen while reading. */
+  @media (max-width: 720px) {
+    .site-header {
+      position: static;
+    }
+
     .nav-cv {
       order: 1;
       margin-left: auto;
@@ -255,6 +277,36 @@ const booking = 'https://cal.com/anas-mansour/intro-call';
     .nav-list {
       gap: 0.25rem 0.8rem;
       font-size: 0.875rem;
+    }
+  }
+
+  /* Touch screens (phones and tablets, any width): 44px-tall tap targets. */
+  @media (pointer: coarse) {
+    .header-inner {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
+
+    .brand,
+    .nav-cv,
+    .nav-list a,
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .nav-list {
+      gap: 0 0.25rem;
+      margin-left: -0.5rem;
+    }
+
+    .nav-list a {
+      padding: 0 0.5rem;
+    }
+
+    .footer-links {
+      gap: 0 1.25rem;
     }
   }
 

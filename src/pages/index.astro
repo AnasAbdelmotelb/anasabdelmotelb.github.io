@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 const linkedIn = 'https://www.linkedin.com/in/anas-mansour-b17302251/';
 const gitHub = 'https://github.com/AnasAbdelmotelb';
 const booking = 'https://cal.com/anas-mansour/intro-call';
+const spotFakeRepo = 'https://github.com/AnasAbdelmotelb/SpotFake_Project';
 
 // Formspree form endpoint. The form ID is public by design (it is in the page HTML);
 // it is not a secret or an API key.
@@ -71,8 +72,12 @@ const skillGroups = [
       <a class="button-secondary" href={booking} rel="noopener noreferrer" target="_blank">
         Book a Call<span class="visually-hidden"> (opens in a new tab)</span>
       </a>
-      <a class="button-secondary" href={linkedIn} rel="me noopener" target="_blank">LinkedIn</a>
-      <a class="button-secondary" href={gitHub} rel="me noopener" target="_blank">GitHub</a>
+      <a class="button-secondary" href={linkedIn} rel="me noopener" target="_blank">
+        LinkedIn<span class="visually-hidden"> (opens in a new tab)</span>
+      </a>
+      <a class="button-secondary" href={gitHub} rel="me noopener" target="_blank">
+        GitHub<span class="visually-hidden"> (opens in a new tab)</span>
+      </a>
     </div>
   </section>
 
@@ -193,7 +198,12 @@ const skillGroups = [
           <li>NLP</li>
           <li>TF-IDF</li>
         </ul>
-        <p><a href="#graduation-project">Read more about SpotFake</a></p>
+        <p class="card-links">
+          <a href="#graduation-project">Read more about SpotFake</a>
+          <a href={spotFakeRepo} rel="noopener" target="_blank">
+            Code on GitHub<span class="visually-hidden"> (opens in a new tab)</span>
+          </a>
+        </p>
       </article>
     </div>
   </section>
@@ -214,6 +224,11 @@ const skillGroups = [
         <li>Evaluated the models using Accuracy, Precision, Recall and F1-score.</li>
         <li>Collaborated with team members to develop, test and present the final solution.</li>
       </ul>
+      <p class="card-links">
+        <a href={spotFakeRepo} rel="noopener" target="_blank">
+          View the SpotFake repository on GitHub<span class="visually-hidden"> (opens in a new tab)</span>
+        </a>
+      </p>
     </article>
   </section>
 
@@ -532,6 +547,28 @@ const skillGroups = [
   .empty-state p:last-child {
     margin: 0;
     color: var(--muted);
+  }
+
+  .card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+  }
+
+  .card > .card-links {
+    margin-top: 1rem;
+  }
+
+  @media (pointer: coarse) {
+    .card-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .card > .card-links {
+      margin-top: 0.5rem;
+    }
   }
 
   .contact-card {
