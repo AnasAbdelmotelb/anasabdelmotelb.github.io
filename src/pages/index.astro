@@ -5,6 +5,10 @@ const linkedIn = 'https://www.linkedin.com/in/anas-mansour-b17302251/';
 const gitHub = 'https://github.com/AnasAbdelmotelb';
 const booking = 'https://cal.com/anas-mansour/intro-call';
 
+// Formspree form endpoint. The form ID is public by design (it is in the page HTML);
+// it is not a secret or an API key.
+const formspreeEndpoint = 'https://formspree.io/f/xyeklekk';
+
 const skillGroups = [
   {
     title: 'AI & Machine Learning',
@@ -238,6 +242,35 @@ const skillGroups = [
         <p class="badge">Coming soon</p>
         <p>More technical notes on LLM workflows and machine-learning projects will appear here.</p>
       </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section container" aria-labelledby="contact-title">
+    <h2 id="contact-title"><span class="section-index">08</span> Contact</h2>
+    <div class="card contact-card">
+      <p>
+        Have a question or an opportunity? Send me a message and it goes straight to my inbox.
+      </p>
+      <form class="contact-form" action={formspreeEndpoint} method="POST">
+        <label for="contact-name">Name</label>
+        <input id="contact-name" name="name" type="text" autocomplete="name" maxlength="100" required />
+
+        <label for="contact-email">Email</label>
+        <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="200" required />
+
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" name="message" rows="6" maxlength="2000" required></textarea>
+
+        <div class="honeypot" aria-hidden="true">
+          <label for="contact-gotcha">Leave this field empty</label>
+          <input id="contact-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button class="cv-button" type="submit">Send message</button>
+      </form>
+      <p class="form-note">
+        Messages are delivered through Formspree. Your details are only used to reply to you.
+      </p>
     </div>
   </section>
 </Layout>
@@ -499,5 +532,60 @@ const skillGroups = [
   .empty-state p:last-child {
     margin: 0;
     color: var(--muted);
+  }
+
+  .contact-card {
+    max-width: 42rem;
+  }
+
+  .contact-form {
+    display: grid;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+  }
+
+  .contact-form label {
+    margin-top: 0.6rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+  }
+
+  .contact-form textarea {
+    resize: vertical;
+  }
+
+  .contact-form input:focus-visible,
+  .contact-form textarea:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .contact-form button {
+    justify-self: start;
+    margin-top: 1rem;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+  }
+
+  .honeypot {
+    display: none;
+  }
+
+  .card > .form-note {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 0.9rem;
   }
 </style>
