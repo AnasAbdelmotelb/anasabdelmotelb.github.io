@@ -6,7 +6,8 @@ Personal portfolio of **Anas Mansour**, AI Engineer and Backend AI Engineer Inte
 
 ## What's on the site
 
-- **Homepage** (`/`): hero with positioning and links to LinkedIn, GitHub, a Cal.com booking page and the CV, followed by About, Technical Skills, Experience, Selected Projects, Graduation Project (SpotFake) and Writing & Technical Notes sections.
+- **Homepage** (`/`): hero with positioning and links to LinkedIn, GitHub, a Cal.com booking page and the CV, followed by About, Technical Skills, Experience, Selected Projects, Graduation Project (SpotFake), Writing & Technical Notes and Contact (a Formspree form) sections.
+- **Tech Docs case study** (`/projects/tech-docs/`): how the Tech Docs Research Workflow works, one real run (HTTP caching) with what review caught, and the results of all five recorded test runs.
 - **DNS walkthrough** (`/dns/`): a technical note explaining how DNS resolves this site, covering the recursive resolver, nameservers, DNS records, the response and TTL, and CNAME records.
 - **CV download** (`/cv.pdf`): the public PDF CV, linked from the hero, navigation and footer.
 
@@ -39,6 +40,7 @@ npm run preview  # serve the built site locally
 │   ├── layouts/Layout.astro       # shared HTML shell, navigation, footer, meta tags, base styles
 │   └── pages/
 │       ├── index.astro            # homepage
-│       └── dns.astro              # DNS walkthrough (/dns/)
+│       ├── dns.astro              # DNS walkthrough (/dns/)
+│       └── projects/tech-docs.astro  # Tech Docs case study (/projects/tech-docs/)
 └── astro.config.mjs
 ```

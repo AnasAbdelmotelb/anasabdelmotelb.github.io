@@ -1,0 +1,374 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const steps = [
+  {
+    name: 'Gather',
+    tool: 'HTTP requests to Jina Reader',
+    does: 'Fetches each documentation page as plain text (up to 15,000 characters per page). If fewer than two pages are usable, the run stops.',
+  },
+  {
+    name: 'Synthesize',
+    tool: 'Claude Haiku 4.5',
+    does: 'Extracts up to 25 facts as JSON, each with its source and a verbatim quote, plus any conflicts between sources and any gaps in what they cover.',
+  },
+  {
+    name: 'Draft',
+    tool: 'Claude Haiku 4.5',
+    does: 'Writes the brief from the fact sheet only, citing a fact for every claim and staying within the chosen word limit.',
+  },
+  {
+    name: 'Review & Format',
+    tool: 'Claude Haiku 4.5',
+    does: 'Checks every claim against the fact sheet, rewrites or flags overclaims, converts citations to sources and publishes the brief to Google Docs.',
+  },
+  {
+    name: 'Human review',
+    tool: 'Me',
+    does: 'Every brief stops here. I check the cited sources and record a decision (approve, edit or reject) and the time spent in a Google Sheets run log.',
+  },
+];
+
+const runs = [
+  { topic: 'SQLite write-ahead logging', test: 'Normal case', runtime: '47.1 s', review: '24 min' },
+  { topic: 'Docker multi-stage builds', test: 'Normal case', runtime: '32.9 s', review: '23 min' },
+  { topic: 'Running asyncio tasks concurrently', test: 'One dead source URL', runtime: '42.0 s', review: '27 min' },
+  { topic: 'Pydantic custom field validators', test: 'Sources that conflict', runtime: '49.8 s', review: '29 min' },
+  { topic: 'HTTP caching with Cache-Control', test: 'Different audience and word limit', runtime: '44.2 s', review: '25 min' },
+];
+---
+
+<Layout
+  title="Tech Docs Research Workflow | Anas Mansour"
+  description="Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs."
+>
+  <article class="case container">
+    <p class="back"><a href="/#projects">← Back to Selected Projects</a></p>
+    <p class="eyebrow">Case study · FlyRank AI internship</p>
+    <h1>Tech Docs Research Workflow</h1>
+    <p class="lead">
+      A technical question and 2–5 documentation links go in; a short brief comes out, where every claim
+      cites its source and anything uncertain is left visible for a human to check.
+    </p>
+
+    <dl class="summary">
+      <div>
+        <dt>Problem</dt>
+        <dd>
+          Answering a technical question means reading several documentation pages. AI can speed this up,
+          but its answers cannot be trusted unless every claim can be traced back to a source.
+        </dd>
+      </div>
+      <div>
+        <dt>What I built</dt>
+        <dd>
+          A four-step automated workflow in Make.com using Claude Haiku 4.5, Google Sheets and Google Docs,
+          followed by a mandatory human review step.
+        </dd>
+      </div>
+      <div>
+        <dt>Result</dt>
+        <dd>
+          5 of 5 recorded test runs completed end to end with no errors, retries or manual steps, in 32.9–49.8
+          seconds of automated runtime each. I reviewed all five briefs and edited every one before use.
+        </dd>
+      </div>
+    </dl>
+
+    <section aria-labelledby="how-title">
+      <h2 id="how-title">How it works</h2>
+      <p>
+        Each run takes a topic, a question, an audience, 2–5 documentation links and a word limit (300, 500 or
+        800). Every step writes its output and status to a Google Sheets run log, so each run can be traced.
+      </p>
+      <ol class="steps">
+        {steps.map((step, i) => (
+          <li>
+            <p class="step-name"><span class="step-number">{i + 1}</span> {step.name}</p>
+            <p class="step-tool">{step.tool}</p>
+            <p>{step.does}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section aria-labelledby="example-title">
+      <h2 id="example-title">A real run: HTTP caching</h2>
+      <p>The fifth recorded test run, as it was submitted:</p>
+      <dl class="facts">
+        <div>
+          <dt>Question</dt>
+          <dd>
+            Which Cache-Control directives should an API use to control caching, and how do no-cache,
+            no-store and max-age differ?
+          </dd>
+        </div>
+        <div>
+          <dt>Audience · word limit</dt>
+          <dd>Tech lead · 300 words</dd>
+        </div>
+        <div>
+          <dt>Sources</dt>
+          <dd>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control" rel="noopener" target="_blank">
+              MDN: Cache-Control header<span class="visually-hidden"> (opens in a new tab)</span>
+            </a><br />
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching" rel="noopener" target="_blank">
+              MDN: HTTP caching guide<span class="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+      <h3>What the workflow produced</h3>
+      <ul class="bullets">
+        <li>A fact sheet of 22 facts drawn from both sources, with 4 gaps the sources did not answer.</li>
+        <li>A 298-word brief (limit 300) that kept its caveats and all 4 open questions.</li>
+        <li>
+          The automated review rewrote one overstated phrase ("ensuring freshness on each access") and flagged
+          the advice to "use max-age alone for public data" for a human to check.
+        </li>
+        <li>Automated runtime: 44.2 seconds.</li>
+      </ul>
+      <h3>What my review caught (26 September 2026)</h3>
+      <ul class="bullets">
+        <li>
+          The automated review's log said the max-age sentence was "kept but flagged", but the final brief had
+          removed it, so the log and the output disagreed.
+        </li>
+        <li>
+          Two recommendations, combining caching approaches and the mention of CDNs, were not in the extracted
+          facts and had not been flagged. I marked them for verification and kept the supported Cache-Control
+          explanation.
+        </li>
+        <li>Decision: edited. Review time: about 25 minutes (my own estimate, not timed).</li>
+      </ul>
+
+      <h3>Corrected against the sources (16 October 2026)</h3>
+      <p>
+        Before publishing this example I checked every claim in the original output against the two MDN pages.
+        These corrections were made outside the workflow; the workflow did not make them.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Original output</th><th scope="col">Reviewed version</th><th scope="col">Why</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>no-cache must be revalidated "before each reuse, even offline"</td>
+              <td>"…even when the cache is disconnected from the origin server"</td>
+              <td>MDN's wording; "offline" could be read as the user's device being offline</td>
+            </tr>
+            <tr>
+              <td>no-store "prevents any cache from storing the response"</td>
+              <td>"tells caches of any kind … not to store the response"</td>
+              <td>MDN says caches "should not store this response": an instruction, not a guarantee</td>
+            </tr>
+            <tr>
+              <td>"For sensitive data that must not persist, use no-store"</td>
+              <td>"If a response should not be stored in any cache, use no-store"</td>
+              <td>Neither source mentions sensitive data</td>
+            </tr>
+            <tr>
+              <td>s-maxage: "combine both when client and intermediate caching differ"</td>
+              <td>Removed</td>
+              <td>Neither source recommends combining s-maxage with max-age</td>
+            </tr>
+            <tr>
+              <td>s-maxage "overrides max-age for proxies and CDNs"</td>
+              <td>Kept, as shared caches "(for example a proxy or CDN)"</td>
+              <td>The Cache-Control page names proxies and CDNs as shared caches</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <a href="/projects/tech-docs/http-caching-brief-reviewed.pdf">
+          Read the full reviewed brief (PDF, 2 pages, 116 KB)
+        </a>
+      </p>
+    </section>
+
+    <section aria-labelledby="runs-title">
+      <h2 id="runs-title">All five recorded runs</h2>
+      <p>
+        Each test input was approved before running and run once. Runtime is the automated part only; review
+        time is my own whole-minute estimate.
+      </p>
+      <div class="table-wrap">
+        <table class="runs">
+          <thead>
+            <tr><th scope="col">Topic</th><th scope="col">Test</th><th scope="col">Runtime</th><th scope="col">My review</th></tr>
+          </thead>
+          <tbody>
+            {runs.map((run) => (
+              <tr><td>{run.topic}</td><td>{run.test}</td><td>{run.runtime}</td><td>{run.review}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p>
+        All five briefs needed edits, which is why the human review step is mandatory. Problems the automated
+        steps missed and my review caught included citations pointing to the wrong source (Pydantic), a dead
+        link that was counted as usable (asyncio) and a key page that yielded no facts (Docker).
+      </p>
+      <p>
+        On the one topic I also researched by hand (SQLite), doing it manually took 28 min 39 s; the workflow plus
+        my review took about 24 min 47 s. Review time, not the automation, is now the limit.
+      </p>
+    </section>
+  </article>
+</Layout>
+
+<style>
+  .case {
+    max-width: 46rem;
+    padding-top: clamp(2rem, 6vw, 3.5rem);
+  }
+
+  .back {
+    margin: 0 0 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 7vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .lead {
+    font-size: clamp(1.05rem, 2.8vw, 1.2rem);
+    color: var(--muted);
+  }
+
+  h2 {
+    margin: 2.5rem 0 0.75rem;
+    font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  p {
+    margin: 0 0 1rem;
+  }
+
+  .summary,
+  .facts {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0 0;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .summary dt,
+  .facts dt {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .summary dd,
+  .facts dd {
+    margin: 0.25rem 0 0;
+  }
+
+  .facts dd a {
+    overflow-wrap: anywhere;
+  }
+
+  .steps {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .steps li {
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .steps li p {
+    margin: 0.35rem 0 0;
+  }
+
+  .steps li .step-name {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .step-number {
+    display: inline-block;
+    min-width: 1.6rem;
+    font-family: var(--mono);
+    color: var(--accent);
+  }
+
+  .steps li .step-tool {
+    margin: 0.1rem 0 0;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .bullets {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+  }
+
+  .bullets li + li {
+    margin-top: 0.4rem;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 0 0 1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  th,
+  td {
+    padding: 0.55rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .runs td:nth-child(3),
+  .runs td:nth-child(4) {
+    white-space: nowrap;
+  }
+</style>

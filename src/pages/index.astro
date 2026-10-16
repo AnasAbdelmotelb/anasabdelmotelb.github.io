@@ -92,8 +92,8 @@ const skillGroups = [
       </p>
       <p>
         My foundation is in Python, Scikit-learn and NLP for machine-learning model development and
-        evaluation, which I applied in SpotFake, a text-based fake news detection system built as a
-        university team project.
+        evaluation, which I applied in SpotFake, a fake news detection system I built end to end as my
+        final-year project.
       </p>
     </div>
     <dl class="facts">
@@ -162,21 +162,29 @@ const skillGroups = [
       <article class="card">
         <p class="item-kicker">FlyRank AI</p>
         <h3>Tech Docs Research Workflow</h3>
-        <p>
-          A multi-stage LLM automation that converts a question and a set of documentation URLs into a
-          cited technical brief published to Google Docs.
-        </p>
+        <dl class="case-points">
+          <dt>Problem</dt>
+          <dd>
+            Answering a technical question means reading several documentation pages, and an AI answer
+            cannot be trusted unless every claim traces back to a source.
+          </dd>
+          <dt>What I built</dt>
+          <dd>
+            A four-step Make.com workflow with Claude Haiku 4.5 that turns a question and 2–5 documentation
+            links into a cited brief in Google Docs, then stops for my review.
+          </dd>
+          <dt>Result</dt>
+          <dd>
+            5 of 5 recorded test runs completed with no errors, in 33–50 seconds each. I reviewed and edited
+            all five briefs before use.
+          </dd>
+        </dl>
         <ol class="pipeline" aria-label="Workflow stages">
           <li>Gather</li>
           <li>Synthesize</li>
           <li>Draft</li>
           <li>Review &amp; Format</li>
         </ol>
-        <ul class="bullets">
-          <li>Fetches documentation as clean text via HTTP requests to Jina Reader, with input validation and error handling for failed URLs.</li>
-          <li>Ties each fact to a source ID and verbatim quote, and removes unsupported statements in review.</li>
-          <li>Uses Regex and JSON parsing to extract model output and logs each step to a Google Sheets run log.</li>
-        </ul>
         <ul class="tags">
           <li>Make.com</li>
           <li>Anthropic Claude</li>
@@ -184,19 +192,37 @@ const skillGroups = [
           <li>Structured JSON</li>
           <li>Human-in-the-Loop</li>
         </ul>
+        <p class="card-links">
+          <a href="/projects/tech-docs/">See a real run: input, steps and results</a>
+        </p>
       </article>
 
       <article class="card">
-        <p class="item-kicker">Graduation project</p>
+        <p class="item-kicker">Graduation project · individual</p>
         <h3>SpotFake – Fake News Detection</h3>
-        <p>
-          A text-based fake news detection system built in Python with Scikit-learn and TF-IDF features.
-        </p>
+        <dl class="case-points">
+          <dt>Problem</dt>
+          <dd>
+            Fake news spreads both as article text and as screenshots, and readers have no quick way to check
+            either.
+          </dd>
+          <dt>What I built</dt>
+          <dd>
+            The whole system, on my own: data preprocessing, TF-IDF features, a Logistic Regression
+            classifier, Tesseract.js OCR for text in images and a React web app.
+          </dd>
+          <dt>Result</dt>
+          <dd>
+            About 98.55% accuracy and a 98.48% F1-score on a held-out 20% test set, as reported in my final
+            project report.
+          </dd>
+        </dl>
         <ul class="tags">
           <li>Python</li>
           <li>Scikit-learn</li>
-          <li>NLP</li>
           <li>TF-IDF</li>
+          <li>Tesseract.js</li>
+          <li>React</li>
         </ul>
         <p class="card-links">
           <a href="#graduation-project">Read more about SpotFake</a>
@@ -214,15 +240,16 @@ const skillGroups = [
       <header class="item-header">
         <div>
           <h3>SpotFake – Fake News Detection</h3>
-          <p class="item-org">University team project · University of Hertfordshire</p>
+          <p class="item-org">Individual final-year project · University of Hertfordshire</p>
         </div>
         <p class="item-date">Sep 2025 – May 2026</p>
       </header>
       <ul class="bullets">
-        <li>Developed a text-based fake news detection system in Python, training machine-learning models with Scikit-learn.</li>
-        <li>Applied NLP techniques, including text preprocessing and TF-IDF vectorization, to convert raw news text into numerical features.</li>
-        <li>Evaluated the models using Accuracy, Precision, Recall and F1-score.</li>
-        <li>Collaborated with team members to develop, test and present the final solution.</li>
+        <li>Built SpotFake end to end on my own: a web app that classifies news as likely real or fake from typed text or from text in an uploaded image.</li>
+        <li>Preprocessed labelled fake and real news articles and converted them into TF-IDF features.</li>
+        <li>Trained a Logistic Regression classifier in Python with Scikit-learn.</li>
+        <li>Integrated Tesseract.js OCR to extract text from screenshots, and built the interface in React and TypeScript.</li>
+        <li>On a held-out 20% test split, my final report records about 98.55% accuracy, 98.35% precision, 98.62% recall and a 98.48% F1-score.</li>
       </ul>
       <p class="card-links">
         <a href={spotFakeRepo} rel="noopener" target="_blank">
@@ -232,18 +259,8 @@ const skillGroups = [
     </article>
   </section>
 
-  <section id="capstone" class="section container" aria-labelledby="capstone-title">
-    <h2 id="capstone-title"><span class="section-index">06</span> Capstone Work — Coming Soon</h2>
-    <div class="card empty-state">
-      <p>
-        A dedicated space for future capstone work, project details, and outcomes. This section will be
-        updated when the capstone is ready.
-      </p>
-    </div>
-  </section>
-
   <section id="writing" class="section container" aria-labelledby="writing-title">
-    <h2 id="writing-title"><span class="section-index">07</span> Writing &amp; Technical Notes</h2>
+    <h2 id="writing-title"><span class="section-index">06</span> Writing &amp; Technical Notes</h2>
     <div class="project-grid">
       <article class="card">
         <p class="item-kicker">Technical note</p>
@@ -253,15 +270,11 @@ const skillGroups = [
           a browser looks up this site.
         </p>
       </article>
-      <div class="card empty-state">
-        <p class="badge">Coming soon</p>
-        <p>More technical notes on LLM workflows and machine-learning projects will appear here.</p>
-      </div>
     </div>
   </section>
 
   <section id="contact" class="section container" aria-labelledby="contact-title">
-    <h2 id="contact-title"><span class="section-index">08</span> Contact</h2>
+    <h2 id="contact-title"><span class="section-index">07</span> Contact</h2>
     <div class="card contact-card">
       <p>
         Have a question or an opportunity? Send me a message and it goes straight to my inbox.
@@ -529,24 +542,25 @@ const skillGroups = [
     color: var(--accent);
   }
 
-  .empty-state {
-    border-style: dashed;
+  .case-points {
+    margin: 0.75rem 0 0;
   }
 
-  .card > .badge {
-    display: inline-block;
-    margin: 0 0 0.75rem;
-    padding: 0.15rem 0.6rem;
-    border-radius: 999px;
-    background: var(--accent-soft);
-    color: var(--accent);
+  .case-points dt {
+    margin-top: 0.75rem;
     font-family: var(--mono);
     font-size: 0.8rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  .empty-state p:last-child {
-    margin: 0;
-    color: var(--muted);
+  .case-points dt:first-child {
+    margin-top: 0;
+  }
+
+  .case-points dd {
+    margin: 0.2rem 0 0;
   }
 
   .card-links {
