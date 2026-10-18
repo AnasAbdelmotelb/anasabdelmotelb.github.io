@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Page not found | Anas Mansour"
+  description="This page does not exist on Anas Mansour's portfolio."
+  noindex
+>
+  <section class="not-found container" aria-labelledby="not-found-title">
+    <p class="eyebrow">404</p>
+    <h1 id="not-found-title">This page does not exist</h1>
+    <p>The link may be old or mistyped. These pages do exist:</p>
+    <ul class="links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/#projects">Selected projects</a></li>
+      <li><a href="/projects/tech-docs/">Tech Docs case study</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    max-width: 46rem;
+    padding-top: clamp(3rem, 10vw, 6rem);
+  }
+
+  .eyebrow {
+    margin: 0 0 0.5rem;
+    font-family: var(--mono);
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Touch screens: 44px-tall tap targets, like the rest of the site. */
+  @media (pointer: coarse) {
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+  }
+</style>

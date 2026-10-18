@@ -2,10 +2,15 @@
 interface Props {
   title: string;
   description: string;
+  /** Keep this page out of search results (used by the 404 page). */
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// Social-share preview: absolute URLs, because LinkedIn, X and WhatsApp fetch them from outside the site.
+const shareImage = new URL('/og-image.png', Astro.site);
+const shareImageAlt = 'Anas Mansour, AI Engineer: portfolio at anasabdelmotelb.github.io';
 
 const navLinks = [
   { href: '/#about', label: 'About' },
@@ -30,11 +35,23 @@ const booking = 'https://cal.com/anas-mansour/intro-call';
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Anas Mansour" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={shareImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={shareImage} />
+    <meta name="twitter:image:alt" content={shareImageAlt} />
+    <slot name="head" />
     <title>{title}</title>
   </head>
   <body>
@@ -94,6 +111,7 @@ const booking = 'https://cal.com/anas-mansour/intro-call';
     --muted: #5b6b68;
     --accent: #1f7a5c;
     --accent-soft: #e3f2ec;
+    --error: #a3261a;
     --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
 
@@ -106,6 +124,7 @@ const booking = 'https://cal.com/anas-mansour/intro-call';
       --muted: #9fb3ad;
       --accent: #7fd1ae;
       --accent-soft: #173229;
+      --error: #ff9b8f;
     }
   }
 

@@ -10,6 +10,17 @@ const spotFakeRepo = 'https://github.com/AnasAbdelmotelb/SpotFake_Project';
 // it is not a secret or an API key.
 const formspreeEndpoint = 'https://formspree.io/f/xyeklekk';
 
+// Structured data for search engines: who this site is about, using only facts shown on the page.
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Anas Mansour',
+  url: 'https://anasabdelmotelb.github.io/',
+  jobTitle: 'Backend AI Engineer Intern',
+  worksFor: { '@type': 'Organization', name: 'FlyRank AI' },
+  sameAs: [linkedIn, gitHub],
+};
+
 const skillGroups = [
   {
     title: 'AI & Machine Learning',
@@ -58,6 +69,7 @@ const skillGroups = [
   title="Anas Mansour | AI Engineer"
   description="Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning."
 >
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(personJsonLd)} />
   <section class="hero container" aria-labelledby="hero-title">
     <p class="eyebrow">AI Engineer · AI Automation Engineer</p>
     <h1 id="hero-title">Anas Mansour</h1>
@@ -281,7 +293,7 @@ const skillGroups = [
       </p>
       <form class="contact-form" action={formspreeEndpoint} method="POST">
         <label for="contact-name">Name</label>
-        <input id="contact-name" name="name" type="text" autocomplete="name" maxlength="100" required />
+        <input id="contact-name" name="name" type="text" autocomplete="name" maxlength="100" required pattern=".*\S.*" title="Please enter your name" />
 
         <label for="contact-email">Email</label>
         <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="200" required />
@@ -295,6 +307,7 @@ const skillGroups = [
         </div>
 
         <button class="cv-button" type="submit">Send message</button>
+        <p class="form-status" role="status" aria-live="polite" hidden></p>
       </form>
       <p class="form-note">
         Messages are delivered through Formspree. Your details are only used to reply to you.
@@ -302,6 +315,70 @@ const skillGroups = [
     </div>
   </section>
 </Layout>
+
+<script>
+  // Contact form, progressive enhancement (without JavaScript the form posts to Formspree as before):
+  // - refuses a name or message made only of spaces (F5);
+  // - sends once, even on a fast double click (F6);
+  // - sends in the background and shows the result here, so the visitor stays on the page and sees
+  //   a clear message if Formspree refuses it (F7: messages containing code can be blocked by its filter).
+  const form = document.querySelector<HTMLFormElement>('.contact-form');
+  if (form) {
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const status = form.querySelector<HTMLParagraphElement>('.form-status')!;
+    const fields = ['name', 'message'].map((name) => form.elements.namedItem(name) as HTMLInputElement);
+    let sending = false;
+
+    const showStatus = (state: 'sent' | 'error', html: string) => {
+      status.dataset.state = state;
+      status.innerHTML = html;
+      status.hidden = false;
+    };
+
+    for (const field of fields) {
+      field.addEventListener('input', () => field.setCustomValidity(''));
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (sending) return;
+
+      for (const field of fields) {
+        field.value = field.value.trim();
+        field.setCustomValidity(field.value ? '' : `Please write your ${field.name}.`);
+      }
+      if (!form.reportValidity()) return;
+
+      sending = true;
+      button.disabled = true;
+      const label = button.textContent;
+      button.textContent = 'Sending…';
+      status.hidden = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        form.reset();
+        showStatus('sent', 'Thanks, your message was sent. I will reply by email.');
+      } catch {
+        showStatus(
+          'error',
+          'Sorry, your message could not be sent. If it contains code or HTML, remove it and try again, ' +
+            'or reach me through <a href="https://cal.com/anas-mansour/intro-call" rel="noopener noreferrer" target="_blank">Book a Call</a> ' +
+            'or <a href="https://www.linkedin.com/in/anas-mansour-b17302251/" rel="me noopener" target="_blank">LinkedIn</a>.',
+        );
+      } finally {
+        sending = false;
+        button.disabled = false;
+        button.textContent = label;
+      }
+    });
+  }
+</script>
 
 <style>
   .hero {
@@ -365,7 +442,6 @@ const skillGroups = [
 
   .cv-meta {
     font-weight: 400;
-    opacity: 0.85;
   }
 
   .button-secondary {
@@ -628,6 +704,27 @@ const skillGroups = [
     cursor: pointer;
     font: inherit;
     font-weight: 600;
+  }
+
+  .contact-form button:disabled {
+    cursor: progress;
+    filter: none;
+    opacity: 0.75;
+  }
+
+  .form-status {
+    margin: 0.75rem 0 0;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--accent-soft);
+    color: var(--text);
+  }
+
+  .form-status[data-state='error'] {
+    border-color: var(--error);
+    background: transparent;
+    color: var(--error);
   }
 
   .honeypot {
