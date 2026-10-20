@@ -1,0 +1,23 @@
+{
+ "chromium": {
+  "after_seconds": 25,
+  "button": "disabled/Sending\u2026",
+  "status": null,
+  "message_kept": "Hang test.",
+  "requests_held": 1
+ },
+ "firefox": {
+  "after_seconds": 25,
+  "button": "disabled/Sending\u2026",
+  "status": null,
+  "message_kept": "Hang test.",
+  "requests_held": 1
+ },
+ "webkit": {
+  "after_seconds": 25,
+  "button": "disabled/Sending\u2026",
+  "status": null,
+  "message_kept": "Hang test.",
+  "requests_held": 1
+ }
+}

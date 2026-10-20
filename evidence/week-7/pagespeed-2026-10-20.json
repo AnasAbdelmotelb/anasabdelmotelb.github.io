@@ -1,0 +1,13 @@
+{
+  "tool": "PageSpeed Insights (https://pagespeed.web.dev/), run in a browser",
+  "report_url": "https://pagespeed.web.dev/analysis/https-anasabdelmotelb-github-io/2xxpmhwtro",
+  "tested_url": "https://anasabdelmotelb.github.io/",
+  "captured_at": "Oct 20, 2026, 7:54 PM GMT+3 (as shown in the report)",
+  "lighthouse_version": "13.5.0",
+  "field_data": "No Data (Chrome UX Report has no real-user data for this site)",
+  "mobile": {"emulation": "Moto G Power", "performance": 100, "accessibility": 100, "best_practices": 100, "seo": 100,
+             "FCP": "0.8 s", "LCP": "0.8 s", "TBT": "0 ms", "CLS": "0", "Speed Index": "0.8 s"},
+  "desktop": {"emulation": "Desktop", "performance": 100, "accessibility": 100, "best_practices": 100, "seo": 100,
+              "FCP": "0.2 s", "LCP": "0.2 s", "TBT": "0 ms", "CLS": "0", "Speed Index": "0.3 s"},
+  "note": "The keyless PageSpeed Insights API returned HTTP 429 (daily quota exceeded) on the same day, so the web UI was used instead."
+}

@@ -1,0 +1,47 @@
+# Sitemap and robots.txt check, 2026-10-20 17:02 UTC
+
+## https://anasabdelmotelb.github.io/sitemap-index.xml (User-Agent: Googlebot)
+HTTP/2 200 
+content-type: application/xml
+last-modified: Mon, 19 Oct 2026 18:39:28 GMT
+cache-control: max-age=600
+content-length: 196
+--- http:// version:
+301 -> https://anasabdelmotelb.github.io/sitemap-index.xml
+--- body:
+<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://anasabdelmotelb.github.io/sitemap-0.xml</loc></sitemap></sitemapindex>
+
+## https://anasabdelmotelb.github.io/sitemap-0.xml (User-Agent: Googlebot)
+HTTP/2 200 
+content-type: application/xml
+last-modified: Mon, 19 Oct 2026 18:39:28 GMT
+cache-control: max-age=600
+content-length: 525
+--- http:// version:
+301 -> https://anasabdelmotelb.github.io/sitemap-0.xml
+--- body:
+<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"><url><loc>https://anasabdelmotelb.github.io/</loc></url><url><loc>https://anasabdelmotelb.github.io/dns/</loc></url><url><loc>https://anasabdelmotelb.github.io/projects/tech-docs/</loc></url></urlset>
+
+## https://anasabdelmotelb.github.io/robots.txt (User-Agent: Googlebot)
+HTTP/2 200 
+content-type: text/plain; charset=utf-8
+last-modified: Mon, 19 Oct 2026 18:39:28 GMT
+cache-control: max-age=600
+content-length: 85
+--- http:// version:
+301 -> https://anasabdelmotelb.github.io/robots.txt
+--- body:
+User-agent: *
+Allow: /
+
+Sitemap: https://anasabdelmotelb.github.io/sitemap-index.xml
+
+
+## XML well-formedness and sitemaps.org XSD validation (xmllint)
+sitemap-index.xml validates
+sitemap-0.xml validates
+
+## Every <loc> in sitemap-0.xml
+https://anasabdelmotelb.github.io/  status=200 redirects=0  canonical=https://anasabdelmotelb.github.io/ noindex=0
+https://anasabdelmotelb.github.io/dns/  status=200 redirects=0  canonical=https://anasabdelmotelb.github.io/dns/ noindex=0
+https://anasabdelmotelb.github.io/projects/tech-docs/  status=200 redirects=0  canonical=https://anasabdelmotelb.github.io/projects/tech-docs/ noindex=0

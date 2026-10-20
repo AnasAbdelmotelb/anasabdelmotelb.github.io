@@ -1,0 +1,110 @@
+{
+ "chromium": {
+  "empty form": {
+   "checkValidity": false,
+   "requests_attempted": 0,
+   "browser_messages": [
+    "name: Please fill out this field.",
+    "email: Please fill out this field.",
+    "message: Please fill out this field."
+   ]
+  },
+  "junk email 'notanemail'": {
+   "checkValidity": false,
+   "requests_attempted": 0,
+   "browser_messages": [
+    "email: Please include an '@' in the email address. 'notanemail' is missing an '@'."
+   ]
+  },
+  "email 'a@b' (no dot)": {
+   "checkValidity": true,
+   "requests_attempted": 1,
+   "browser_messages": []
+  },
+  "whitespace-only name and message": {
+   "checkValidity": true,
+   "requests_attempted": 1,
+   "browser_messages": []
+  },
+  "valid input, double-click": {
+   "checkValidity": true,
+   "requests_attempted": 1,
+   "browser_messages": []
+  },
+  "typing 2010 chars into message (maxlength 2000)": {
+   "value_length": 2000
+  }
+ },
+ "firefox": {
+  "empty form": {
+   "checkValidity": false,
+   "requests_attempted": 0,
+   "browser_messages": [
+    "name: Please fill out this field.",
+    "email: Please fill out this field.",
+    "message: Please fill out this field."
+   ]
+  },
+  "junk email 'notanemail'": {
+   "checkValidity": false,
+   "requests_attempted": 0,
+   "browser_messages": [
+    "email: Please enter an email address."
+   ]
+  },
+  "email 'a@b' (no dot)": {
+   "checkValidity": true,
+   "requests_attempted": 1,
+   "browser_messages": []
+  },
+  "whitespace-only name and message": {
+   "checkValidity": true,
+   "requests_attempted": 1,
+   "browser_messages": []
+  },
+  "valid input, double-click": {
+   "checkValidity": true,
+   "requests_attempted": 2,
+   "browser_messages": []
+  },
+  "typing 2010 chars into message (maxlength 2000)": {
+   "value_length": 2000
+  }
+ },
+ "webkit": {
+  "empty form": {
+   "checkValidity": false,
+   "requests_attempted": 0,
+   "browser_messages": [
+    "name: Fill out this field",
+    "email: Fill out this field",
+    "message: Fill out this field"
+   ]
+  },
+  "junk email 'notanemail'": {
+   "checkValidity": false,
+   "requests_attempted": 0,
+   "browser_messages": [
+    "email: Enter an email address"
+   ]
+  },
+  "email 'a@b' (no dot)": {
+   "checkValidity": true,
+   "requests_attempted": 1,
+   "browser_messages": []
+  },
+  "whitespace-only name and message": {
+   "checkValidity": true,
+   "requests_attempted": 1,
+   "browser_messages": []
+  },
+  "valid input, double-click": {
+   "checkValidity": true,
+   "requests_attempted": 1,
+   "browser_messages": []
+  },
+  "typing 2010 chars into message (maxlength 2000)": {
+   "value_length": 2000
+  }
+ }
+}

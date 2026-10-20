@@ -33,7 +33,8 @@ works without it:
   - refuses a name or message made only of spaces;
   - sends only once, even on a fast double click;
   - shows "Thanks, your message was sent" on success;
-  - shows a clear error with other ways to get in touch if the message cannot be sent.
+  - shows a clear error with other ways to get in touch if the message cannot be sent;
+  - gives up after 15 seconds if Formspree does not answer, so the button never stays on "Sending…".
 
 ### Known limitations
 

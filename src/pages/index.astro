@@ -359,12 +359,16 @@ const skillGroups = [
       const label = button.textContent;
       button.textContent = 'Sending…';
       status.hidden = true;
+      // W7: a stalled request used to leave the button on "Sending…" for ever; give up after 15 s.
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
 
       try {
         const response = await fetch(form.action, {
           method: 'POST',
           body: new FormData(form),
           headers: { Accept: 'application/json' },
+          signal: controller.signal,
         });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         form.reset();
@@ -372,11 +376,12 @@ const skillGroups = [
       } catch {
         showStatus(
           'error',
-          'Sorry, your message could not be sent. If it contains code or HTML, remove it and try again, ' +
+          'Sorry, your message could not be sent. Please try again (if it contains code or HTML, remove that first), ' +
             'or reach me through <a href="https://cal.com/anas-mansour/intro-call" rel="noopener noreferrer" target="_blank">Book a Call</a> ' +
             'or <a href="https://www.linkedin.com/in/anas-mansour-b17302251/" rel="me noopener" target="_blank">LinkedIn</a>.',
         );
       } finally {
+        clearTimeout(timeout);
         sending = false;
         button.disabled = false;
         button.textContent = label;
