@@ -208,7 +208,7 @@ All paths are relative to `evidence/week-7/` in this repository.
 | `live-before/hang_test.json` | F9 before: stuck on "Sending…" after 25 s, 3 engines |
 | `live-before/screenshots/` | 24 page screenshots (3 engines × 2 viewports × 4 pages) plus the iPhone 13 profile |
 | `local-after/results.json`, `local-after/summary.md`, `local-after/hang_test.json` | Same suite on the fixed local build (screenshots not kept; they duplicate the live ones) |
-| `live-after/` | Same suite on the live site after deploy (section 9) |
+| `live-after/` | Same suite, stall test and link check on the live site after deploy (section 9) |
 | `link-check-live.tsv` | Status, content type and final URL of every link |
 | `sitemap-check.txt` | Headers, bodies, XSD validation and URL checks for the sitemap and robots.txt |
 | `pagespeed-2026-10-20.json`, `screenshots/pagespeed-*.jpg` | PageSpeed Insights results |
@@ -224,7 +224,17 @@ They stay in my private assignment folder. The Search Console statuses are quote
 
 ## 9. Deployment and live verification
 
-_Filled in after deploy._
+| Step | Result |
+|---|---|
+| Build | `npm run build`: 4 pages built, sitemap generated, no errors or warnings. The repo has no lint or test scripts, so the build plus the Playwright suite are the checks |
+| Commit | `e7ac058` "Week 7 Break Your Own Site: form timeout, MDN link, report and evidence", pushed to `main` |
+| Deploy | GitHub Actions run **15** for `e7ac058`: **completed, success** |
+| Live code | The homepage serves the new error wording and the timeout; the Tech Docs page serves the new MDN link (checked with curl) |
+| F9 on live | `live-after/hang_test.json`: after 20 s with Formspree not answering, the error is shown, the button reads "Send message" and the text is kept, in Chromium, Firefox and WebKit |
+| Full suite on live | `live-after/results.json` and `summary.md` (17:14 UTC): **no differences from the baseline** for any form case (requests sent, loading state, success or error, validation), page check, honeypot or keyboard check. No dialogs, no JS errors, no overflow |
+| Links on live | `live-after/link-check.tsv`: 22 links; every one returns 200 with **no redirects**, except LinkedIn (999, K3) |
+| Not deployed | `/reports/…` and `/evidence/…` return 404 on the live site, as intended |
+| Sitemap | Unchanged by this deploy: the live `sitemap-0.xml` is byte-identical to the one checked earlier. The Search Console status is still K5 |
 
 ## 10. Checklist against the assignment
 
