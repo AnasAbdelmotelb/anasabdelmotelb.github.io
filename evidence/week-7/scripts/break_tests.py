@@ -70,6 +70,25 @@ def form_state(page):
     }""")
 
 
+# Exact texts the page must show (H1: one neutral error for every failure: timeout, network, 403, 422).
+EXPECTED_ERROR = "Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn."
+EXPECTED_SUCCESS = "Thanks, your message was sent. I will reply by email."
+EXPECTED_LINKS = ["https://cal.com/anas-mansour/intro-call", "https://www.linkedin.com/in/anas-mansour-b17302251/"]
+
+
+def check_status(page, kind, typed):
+    """Exact-wording assertion for the status line, plus the contact links and whether the typed text was kept."""
+    got = page.evaluate("""() => { const s = document.querySelector('.form-status');
+      return {hidden: s.hidden, state: s.dataset.state, text: s.innerText.replace(/\\s+/g, ' ').trim(),
+              links: [...s.querySelectorAll('a')].map(a => a.href), message: document.querySelector('#contact-message').value} }""")
+    if kind == "ok":
+        ok = not got["hidden"] and got["state"] == "sent" and got["text"] == EXPECTED_SUCCESS and got["message"] == ""
+    else:
+        ok = (not got["hidden"] and got["state"] == "error" and got["text"] == EXPECTED_ERROR
+              and got["links"] == EXPECTED_LINKS and got["message"] == typed)
+    return {"exact_status_ok": ok, "status_text": got["text"], "status_links": got["links"], "message_after": got["message"][:40]}
+
+
 def form_case(browser, label, fill, kind="ok", double=False, js=True):
     ctx = browser.new_context(java_script_enabled=js)
     page = ctx.new_page()
@@ -92,6 +111,8 @@ def form_case(browser, label, fill, kind="ok", double=False, js=True):
         r["result"] = "browser left the page with a plain POST (mock answered)"
     else:
         r.update(form_state(page))
+        if js and len(log) == 1:
+            r.update(check_status(page, kind, fill.get("message", "").strip()))
     if log:
         body = log[0]["body"] or ""
         r["sent_accept_header"] = log[0]["accept"]

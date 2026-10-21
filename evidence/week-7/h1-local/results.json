@@ -1,0 +1,2863 @@
+{
+ "base_url": "http://localhost:4321",
+ "run_at_utc": "2026-10-21T15:02:01Z",
+ "engines": {
+  "chromium": {
+   "version": "156.0.8078.4",
+   "form": [
+    {
+     "case": "empty submit",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: notanemail",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "notanemail",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: Please include an '@' in the email address. 'notanemail' is missing an '@'."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: a@",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "a@",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: Please enter a part following '@'. 'a@' is incomplete."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: @example.com",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: Please enter a part followed by '@'. '@example.com' is incomplete."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: a b@example.com",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "a b@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: A part followed by '@' should not contain the symbol ' '."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "edge email: a@b (valid under HTML rules)",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "whitespace-only name",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "     ",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "name: Please match the requested format."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "whitespace-only message",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": ""
+     },
+     "invalid": [
+      "message: Please write your message."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "garbage input",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 24,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "unusually long message (3,040 chars)",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 1999,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "adversarial: script tag",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 29,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "adversarial: img onerror",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 28,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "adversarial: SQL-style",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 33,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "unicode / RTL / emoji",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 23,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, double-click (duplicate check)",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, server returns 422",
+     "kind": "422",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "status_links": [
+      "https://cal.com/anas-mansour/intro-call",
+      "https://www.linkedin.com/in/anas-mansour-b17302251/"
+     ],
+     "message_after": "Automated test, not a real message.",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, Cloudflare-style 403 block",
+     "kind": "blocked",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "status_links": [
+      "https://cal.com/anas-mansour/intro-call",
+      "https://www.linkedin.com/in/anas-mansour-b17302251/"
+     ],
+     "message_after": "Automated test, not a real message.",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, network failure",
+     "kind": "network",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "status_links": [
+      "https://cal.com/anas-mansour/intro-call",
+      "https://www.linkedin.com/in/anas-mansour-b17302251/"
+     ],
+     "message_after": "Automated test, not a real message.",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "click then Enter twice while sending",
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact"
+    },
+    {
+     "case": "JS off: empty submit",
+     "kind": "ok",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "JS off: whitespace-only name",
+     "kind": "ok",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "   ",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "name: Please match the requested format."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "JS off: whitespace-only message (known gap)",
+     "kind": "ok",
+     "requests_sent": 1,
+     "result": "browser left the page with a plain POST (mock answered)",
+     "sent_accept_header": "text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+     "sent_gotcha_empty": true,
+     "sent_message_length": null,
+     "dialogs": [],
+     "page_errors": []
+    }
+   ],
+   "honeypot": {
+    "name": "_gotcha",
+    "tabindex": -1,
+    "wrapper_display": "none",
+    "aria_hidden": "true",
+    "visible_box": false,
+    "autocomplete": "off",
+    "tab_order_from_name": [
+     "contact-name",
+     "contact-email",
+     "contact-message",
+     "BUTTON",
+     "A",
+     "A"
+    ],
+    "honeypot_focused": false
+   },
+   "pages": [
+    {
+     "engine": "chromium",
+     "viewport": "mobile",
+     "path": "/",
+     "status": 200,
+     "title": "Anas Mansour | AI Engineer",
+     "lang": "en",
+     "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Anas Mansour | AI Engineer",
+      "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+      "url": "https://anasabdelmotelb.github.io/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/chromium-mobile-home.png"
+    },
+    {
+     "engine": "chromium",
+     "viewport": "mobile",
+     "path": "/dns/",
+     "status": 200,
+     "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+     "lang": "en",
+     "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/dns/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+      "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+      "url": "https://anasabdelmotelb.github.io/dns/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/chromium-mobile-dns.png"
+    },
+    {
+     "engine": "chromium",
+     "viewport": "mobile",
+     "path": "/projects/tech-docs/",
+     "status": 200,
+     "title": "Tech Docs Research Workflow | Anas Mansour",
+     "lang": "en",
+     "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Tech Docs Research Workflow | Anas Mansour",
+      "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+      "url": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/chromium-mobile-projects_tech-docs.png"
+    },
+    {
+     "engine": "chromium",
+     "viewport": "mobile",
+     "path": "/this-page-does-not-exist",
+     "status": 404,
+     "title": "Page not found | Anas Mansour",
+     "lang": "en",
+     "description": "This page does not exist on Anas Mansour's portfolio.",
+     "robots": "noindex",
+     "canonical": null,
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Page not found | Anas Mansour",
+      "description": "This page does not exist on Anas Mansour's portfolio.",
+      "url": "https://anasabdelmotelb.github.io/404/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [
+      "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+     ],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/chromium-mobile-this-page-does-not-exist.png"
+    },
+    {
+     "engine": "chromium",
+     "viewport": "desktop",
+     "path": "/",
+     "status": 200,
+     "title": "Anas Mansour | AI Engineer",
+     "lang": "en",
+     "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Anas Mansour | AI Engineer",
+      "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+      "url": "https://anasabdelmotelb.github.io/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/chromium-desktop-home.png"
+    },
+    {
+     "engine": "chromium",
+     "viewport": "desktop",
+     "path": "/dns/",
+     "status": 200,
+     "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+     "lang": "en",
+     "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/dns/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+      "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+      "url": "https://anasabdelmotelb.github.io/dns/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/chromium-desktop-dns.png"
+    },
+    {
+     "engine": "chromium",
+     "viewport": "desktop",
+     "path": "/projects/tech-docs/",
+     "status": 200,
+     "title": "Tech Docs Research Workflow | Anas Mansour",
+     "lang": "en",
+     "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Tech Docs Research Workflow | Anas Mansour",
+      "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+      "url": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/chromium-desktop-projects_tech-docs.png"
+    },
+    {
+     "engine": "chromium",
+     "viewport": "desktop",
+     "path": "/this-page-does-not-exist",
+     "status": 404,
+     "title": "Page not found | Anas Mansour",
+     "lang": "en",
+     "description": "This page does not exist on Anas Mansour's portfolio.",
+     "robots": "noindex",
+     "canonical": null,
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Page not found | Anas Mansour",
+      "description": "This page does not exist on Anas Mansour's portfolio.",
+      "url": "https://anasabdelmotelb.github.io/404/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [
+      "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+     ],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/chromium-desktop-this-page-does-not-exist.png"
+    }
+   ],
+   "keyboard": {
+    "tab_order_first_14": [
+     {
+      "text": "Skip to content",
+      "href": "#main",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Anas Mansour",
+      "href": "/",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "About",
+      "href": "/#about",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Skills",
+      "href": "/#skills",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Experience",
+      "href": "/#experience",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Projects",
+      "href": "/#projects",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Writing",
+      "href": "/#writing",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "DNS",
+      "href": "/dns/",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Contact",
+      "href": "/#contact",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "CV",
+      "href": "/cv.pdf",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Download CV (PDF, 135 KB)",
+      "href": "/cv.pdf",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Book a Call\n(opens in a new tab)",
+      "href": "https://cal.com/anas-mansour/intro-call",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "LinkedIn\n(opens in a new tab)",
+      "href": "https://www.linkedin.com/in/anas-mansour-b17302251/",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "GitHub\n(opens in a new tab)",
+      "href": "https://github.com/AnasAbdelmotelb",
+      "focus_visible": true,
+      "outline": true
+     }
+    ],
+    "skip_link_enter": {
+     "hash": "#main",
+     "active": "BODY"
+    },
+    "nav_contact_enter": {
+     "hash": "#contact",
+     "contact_top": 391
+    }
+   }
+  },
+  "firefox": {
+   "version": "157.0",
+   "form": [
+    {
+     "case": "empty submit",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: notanemail",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "notanemail",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: Please enter an email address."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: a@",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "a@",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: Please enter an email address."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: @example.com",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: Please enter an email address."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: a b@example.com",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "a b@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: Please enter an email address."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "edge email: a@b (valid under HTML rules)",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "whitespace-only name",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "     ",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "name: Please match the requested format: Please enter your name."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "whitespace-only message",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": ""
+     },
+     "invalid": [
+      "message: Please write your message."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "garbage input",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 24,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "unusually long message (3,040 chars)",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 1999,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "adversarial: script tag",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 29,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "adversarial: img onerror",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 28,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "adversarial: SQL-style",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 33,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "unicode / RTL / emoji",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 23,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, double-click (duplicate check)",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, server returns 422",
+     "kind": "422",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "status_links": [
+      "https://cal.com/anas-mansour/intro-call",
+      "https://www.linkedin.com/in/anas-mansour-b17302251/"
+     ],
+     "message_after": "Automated test, not a real message.",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, Cloudflare-style 403 block",
+     "kind": "blocked",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "status_links": [
+      "https://cal.com/anas-mansour/intro-call",
+      "https://www.linkedin.com/in/anas-mansour-b17302251/"
+     ],
+     "message_after": "Automated test, not a real message.",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, network failure",
+     "kind": "network",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "status_links": [
+      "https://cal.com/anas-mansour/intro-call",
+      "https://www.linkedin.com/in/anas-mansour-b17302251/"
+     ],
+     "message_after": "Automated test, not a real message.",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "click then Enter twice while sending",
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact"
+    },
+    {
+     "case": "JS off: empty submit",
+     "kind": "ok",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Please fill out this field.",
+      "email: Please fill out this field.",
+      "message: Please fill out this field."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "JS off: whitespace-only name",
+     "kind": "ok",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "   ",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "name: Please match the requested format: Please enter your name."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "JS off: whitespace-only message (known gap)",
+     "kind": "ok",
+     "requests_sent": 1,
+     "result": "browser left the page with a plain POST (mock answered)",
+     "sent_accept_header": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+     "sent_gotcha_empty": true,
+     "sent_message_length": null,
+     "dialogs": [],
+     "page_errors": []
+    }
+   ],
+   "honeypot": {
+    "name": "_gotcha",
+    "tabindex": -1,
+    "wrapper_display": "none",
+    "aria_hidden": "true",
+    "visible_box": false,
+    "autocomplete": "off",
+    "tab_order_from_name": [
+     "contact-name",
+     "contact-email",
+     "contact-message",
+     "BUTTON",
+     "A",
+     "A"
+    ],
+    "honeypot_focused": false
+   },
+   "pages": [
+    {
+     "engine": "firefox",
+     "viewport": "mobile",
+     "path": "/",
+     "status": 200,
+     "title": "Anas Mansour | AI Engineer",
+     "lang": "en",
+     "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Anas Mansour | AI Engineer",
+      "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+      "url": "https://anasabdelmotelb.github.io/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/firefox-mobile-home.png"
+    },
+    {
+     "engine": "firefox",
+     "viewport": "mobile",
+     "path": "/dns/",
+     "status": 200,
+     "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+     "lang": "en",
+     "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/dns/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+      "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+      "url": "https://anasabdelmotelb.github.io/dns/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/firefox-mobile-dns.png"
+    },
+    {
+     "engine": "firefox",
+     "viewport": "mobile",
+     "path": "/projects/tech-docs/",
+     "status": 200,
+     "title": "Tech Docs Research Workflow | Anas Mansour",
+     "lang": "en",
+     "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Tech Docs Research Workflow | Anas Mansour",
+      "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+      "url": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/firefox-mobile-projects_tech-docs.png"
+    },
+    {
+     "engine": "firefox",
+     "viewport": "mobile",
+     "path": "/this-page-does-not-exist",
+     "status": 404,
+     "title": "Page not found | Anas Mansour",
+     "lang": "en",
+     "description": "This page does not exist on Anas Mansour's portfolio.",
+     "robots": "noindex",
+     "canonical": null,
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Page not found | Anas Mansour",
+      "description": "This page does not exist on Anas Mansour's portfolio.",
+      "url": "https://anasabdelmotelb.github.io/404/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/firefox-mobile-this-page-does-not-exist.png"
+    },
+    {
+     "engine": "firefox",
+     "viewport": "desktop",
+     "path": "/",
+     "status": 200,
+     "title": "Anas Mansour | AI Engineer",
+     "lang": "en",
+     "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Anas Mansour | AI Engineer",
+      "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+      "url": "https://anasabdelmotelb.github.io/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/firefox-desktop-home.png"
+    },
+    {
+     "engine": "firefox",
+     "viewport": "desktop",
+     "path": "/dns/",
+     "status": 200,
+     "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+     "lang": "en",
+     "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/dns/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+      "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+      "url": "https://anasabdelmotelb.github.io/dns/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/firefox-desktop-dns.png"
+    },
+    {
+     "engine": "firefox",
+     "viewport": "desktop",
+     "path": "/projects/tech-docs/",
+     "status": 200,
+     "title": "Tech Docs Research Workflow | Anas Mansour",
+     "lang": "en",
+     "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Tech Docs Research Workflow | Anas Mansour",
+      "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+      "url": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/firefox-desktop-projects_tech-docs.png"
+    },
+    {
+     "engine": "firefox",
+     "viewport": "desktop",
+     "path": "/this-page-does-not-exist",
+     "status": 404,
+     "title": "Page not found | Anas Mansour",
+     "lang": "en",
+     "description": "This page does not exist on Anas Mansour's portfolio.",
+     "robots": "noindex",
+     "canonical": null,
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Page not found | Anas Mansour",
+      "description": "This page does not exist on Anas Mansour's portfolio.",
+      "url": "https://anasabdelmotelb.github.io/404/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/firefox-desktop-this-page-does-not-exist.png"
+    }
+   ],
+   "keyboard": {
+    "tab_order_first_14": [
+     {
+      "text": "Skip to content",
+      "href": "#main",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Anas Mansour",
+      "href": "/",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "About",
+      "href": "/#about",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Skills",
+      "href": "/#skills",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Experience",
+      "href": "/#experience",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Projects",
+      "href": "/#projects",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Writing",
+      "href": "/#writing",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "DNS",
+      "href": "/dns/",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Contact",
+      "href": "/#contact",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "CV",
+      "href": "/cv.pdf",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Download CV (PDF, 135 KB)",
+      "href": "/cv.pdf",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Book a Call\n(opens in a new tab)",
+      "href": "https://cal.com/anas-mansour/intro-call",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "LinkedIn\n(opens in a new tab)",
+      "href": "https://www.linkedin.com/in/anas-mansour-b17302251/",
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "GitHub\n(opens in a new tab)",
+      "href": "https://github.com/AnasAbdelmotelb",
+      "focus_visible": true,
+      "outline": true
+     }
+    ],
+    "skip_link_enter": {
+     "hash": "#main",
+     "active": "BODY"
+    },
+    "nav_contact_enter": {
+     "hash": "#contact",
+     "contact_top": 83
+    }
+   }
+  },
+  "webkit": {
+   "version": "27.2",
+   "form": [
+    {
+     "case": "empty submit",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Fill out this field",
+      "email: Fill out this field",
+      "message: Fill out this field"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: notanemail",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "notanemail",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: Enter an email address"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: a@",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "a@",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: Enter an email address"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: @example.com",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: Enter an email address"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "malformed email: a b@example.com",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "  W7 Test  ",
+      "email": "a b@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "email: Enter an email address"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "edge email: a@b (valid under HTML rules)",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Fill out this field",
+      "email: Fill out this field",
+      "message: Fill out this field"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "whitespace-only name",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "     ",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "name: Match the requested format: Please enter your name"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "whitespace-only message",
+     "kind": "ok",
+     "state_while_in_flight": "no request (blocked before sending)",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": ""
+     },
+     "invalid": [
+      "message: Please write your message."
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "garbage input",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Fill out this field",
+      "email: Fill out this field",
+      "message: Fill out this field"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 24,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "unusually long message (3,040 chars)",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Fill out this field",
+      "email: Fill out this field",
+      "message: Fill out this field"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 1999,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "adversarial: script tag",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Fill out this field",
+      "email: Fill out this field",
+      "message: Fill out this field"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 29,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "adversarial: img onerror",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Fill out this field",
+      "email: Fill out this field",
+      "message: Fill out this field"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 28,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "adversarial: SQL-style",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Fill out this field",
+      "email: Fill out this field",
+      "message: Fill out this field"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 33,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "unicode / RTL / emoji",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Fill out this field",
+      "email: Fill out this field",
+      "message: Fill out this field"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 23,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, double-click (duplicate check)",
+     "kind": "ok",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Fill out this field",
+      "email: Fill out this field",
+      "message: Fill out this field"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Thanks, your message was sent. I will reply by email.",
+     "status_links": [],
+     "message_after": "",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, server returns 422",
+     "kind": "422",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "status_links": [
+      "https://cal.com/anas-mansour/intro-call",
+      "https://www.linkedin.com/in/anas-mansour-b17302251/"
+     ],
+     "message_after": "Automated test, not a real message.",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, Cloudflare-style 403 block",
+     "kind": "blocked",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "status_links": [
+      "https://cal.com/anas-mansour/intro-call",
+      "https://www.linkedin.com/in/anas-mansour-b17302251/"
+     ],
+     "message_after": "Automated test, not a real message.",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "valid, network failure",
+     "kind": "network",
+     "state_while_in_flight": {
+      "disabled": true,
+      "text": "Sending…"
+     },
+     "requests_sent": 1,
+     "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "button": "Send message",
+     "values": {
+      "name": "W7 Test",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [],
+     "url": "http://localhost:4321/#contact",
+     "exact_status_ok": true,
+     "status_text": "Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+     "status_links": [
+      "https://cal.com/anas-mansour/intro-call",
+      "https://www.linkedin.com/in/anas-mansour-b17302251/"
+     ],
+     "message_after": "Automated test, not a real message.",
+     "sent_accept_header": "application/json",
+     "sent_gotcha_empty": true,
+     "sent_message_length": 35,
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "click then Enter twice while sending",
+     "requests_sent": 1,
+     "status": "sent: Thanks, your message was sent. I will reply by email.",
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Fill out this field",
+      "email: Fill out this field",
+      "message: Fill out this field"
+     ],
+     "url": "http://localhost:4321/#contact"
+    },
+    {
+     "case": "JS off: empty submit",
+     "kind": "ok",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "",
+      "email": "",
+      "message": ""
+     },
+     "invalid": [
+      "name: Fill out this field",
+      "email: Fill out this field",
+      "message: Fill out this field"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "JS off: whitespace-only name",
+     "kind": "ok",
+     "requests_sent": 0,
+     "status": null,
+     "button": "Send message",
+     "values": {
+      "name": "   ",
+      "email": "w7-test@example.com",
+      "message": "Automated test, not a real message."
+     },
+     "invalid": [
+      "name: Match the requested format: Please enter your name"
+     ],
+     "url": "http://localhost:4321/#contact",
+     "dialogs": [],
+     "page_errors": []
+    },
+    {
+     "case": "JS off: whitespace-only message (known gap)",
+     "kind": "ok",
+     "requests_sent": 1,
+     "result": "browser left the page with a plain POST (mock answered)",
+     "sent_accept_header": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+     "sent_gotcha_empty": true,
+     "sent_message_length": null,
+     "dialogs": [],
+     "page_errors": []
+    }
+   ],
+   "honeypot": {
+    "name": "_gotcha",
+    "tabindex": -1,
+    "wrapper_display": "none",
+    "aria_hidden": "true",
+    "visible_box": false,
+    "autocomplete": "off",
+    "tab_order_from_name": [
+     "contact-name",
+     "contact-email",
+     "contact-message",
+     "BODY",
+     "contact-name",
+     "contact-email"
+    ],
+    "honeypot_focused": false
+   },
+   "pages": [
+    {
+     "engine": "webkit",
+     "viewport": "mobile",
+     "path": "/",
+     "status": 200,
+     "title": "Anas Mansour | AI Engineer",
+     "lang": "en",
+     "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Anas Mansour | AI Engineer",
+      "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+      "url": "https://anasabdelmotelb.github.io/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/webkit-mobile-home.png"
+    },
+    {
+     "engine": "webkit",
+     "viewport": "mobile",
+     "path": "/dns/",
+     "status": 200,
+     "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+     "lang": "en",
+     "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/dns/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+      "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+      "url": "https://anasabdelmotelb.github.io/dns/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/webkit-mobile-dns.png"
+    },
+    {
+     "engine": "webkit",
+     "viewport": "mobile",
+     "path": "/projects/tech-docs/",
+     "status": 200,
+     "title": "Tech Docs Research Workflow | Anas Mansour",
+     "lang": "en",
+     "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Tech Docs Research Workflow | Anas Mansour",
+      "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+      "url": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/webkit-mobile-projects_tech-docs.png"
+    },
+    {
+     "engine": "webkit",
+     "viewport": "mobile",
+     "path": "/this-page-does-not-exist",
+     "status": 404,
+     "title": "Page not found | Anas Mansour",
+     "lang": "en",
+     "description": "This page does not exist on Anas Mansour's portfolio.",
+     "robots": "noindex",
+     "canonical": null,
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Page not found | Anas Mansour",
+      "description": "This page does not exist on Anas Mansour's portfolio.",
+      "url": "https://anasabdelmotelb.github.io/404/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [
+      "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+     ],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/webkit-mobile-this-page-does-not-exist.png"
+    },
+    {
+     "engine": "webkit",
+     "viewport": "desktop",
+     "path": "/",
+     "status": 200,
+     "title": "Anas Mansour | AI Engineer",
+     "lang": "en",
+     "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Anas Mansour | AI Engineer",
+      "description": "Anas Mansour, AI Engineer and Backend AI Engineer Intern at FlyRank AI. Computer Science and Artificial Intelligence graduate (First Class Honours) working on LLM workflows and machine learning.",
+      "url": "https://anasabdelmotelb.github.io/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/webkit-desktop-home.png"
+    },
+    {
+     "engine": "webkit",
+     "viewport": "desktop",
+     "path": "/dns/",
+     "status": 200,
+     "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+     "lang": "en",
+     "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/dns/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "How DNS Helps My Portfolio Load | Anas Mansour",
+      "description": "A walkthrough of how DNS resolves anasabdelmotelb.github.io: the resolver, nameservers, DNS records, the response, TTL and CNAME records.",
+      "url": "https://anasabdelmotelb.github.io/dns/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/webkit-desktop-dns.png"
+    },
+    {
+     "engine": "webkit",
+     "viewport": "desktop",
+     "path": "/projects/tech-docs/",
+     "status": 200,
+     "title": "Tech Docs Research Workflow | Anas Mansour",
+     "lang": "en",
+     "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+     "robots": null,
+     "canonical": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Tech Docs Research Workflow | Anas Mansour",
+      "description": "Case study: a Make.com and Claude workflow that turns a technical question and 2–5 documentation links into a cited brief, with mandatory human review. Inputs, steps and results from five recorded test runs.",
+      "url": "https://anasabdelmotelb.github.io/projects/tech-docs/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/webkit-desktop-projects_tech-docs.png"
+    },
+    {
+     "engine": "webkit",
+     "viewport": "desktop",
+     "path": "/this-page-does-not-exist",
+     "status": 404,
+     "title": "Page not found | Anas Mansour",
+     "lang": "en",
+     "description": "This page does not exist on Anas Mansour's portfolio.",
+     "robots": "noindex",
+     "canonical": null,
+     "favicon": "http://localhost:4321/favicon.svg",
+     "og": {
+      "title": "Page not found | Anas Mansour",
+      "description": "This page does not exist on Anas Mansour's portfolio.",
+      "url": "https://anasabdelmotelb.github.io/404/",
+      "image": "https://anasabdelmotelb.github.io/og-image.png",
+      "type": "website"
+     },
+     "twitter_card": "summary_large_image",
+     "h1_count": 1,
+     "heading_skips": [],
+     "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true
+     },
+     "missing_fragment_targets": [],
+     "imgs_without_alt": 0,
+     "target_blank_without_noopener": [],
+     "horizontal_overflow_px": 0,
+     "console": [
+      "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+     ],
+     "page_errors": [],
+     "failed_requests": [],
+     "screenshot": "screenshots/webkit-desktop-this-page-does-not-exist.png"
+    }
+   ],
+   "keyboard": {
+    "tab_order_first_14": [
+     {
+      "text": "contact-name",
+      "href": null,
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "contact-email",
+      "href": null,
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "contact-message",
+      "href": null,
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Skip to content\nAnas Mansour\nAbout\nSkill",
+      "href": null,
+      "focus_visible": false,
+      "outline": false
+     },
+     {
+      "text": "contact-name",
+      "href": null,
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "contact-email",
+      "href": null,
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "contact-message",
+      "href": null,
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Skip to content\nAnas Mansour\nAbout\nSkill",
+      "href": null,
+      "focus_visible": false,
+      "outline": false
+     },
+     {
+      "text": "contact-name",
+      "href": null,
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "contact-email",
+      "href": null,
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "contact-message",
+      "href": null,
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "Skip to content\nAnas Mansour\nAbout\nSkill",
+      "href": null,
+      "focus_visible": false,
+      "outline": false
+     },
+     {
+      "text": "contact-name",
+      "href": null,
+      "focus_visible": true,
+      "outline": true
+     },
+     {
+      "text": "contact-email",
+      "href": null,
+      "focus_visible": true,
+      "outline": true
+     }
+    ],
+    "skip_link_enter": {
+     "hash": "",
+     "active": "contact-name"
+    },
+    "nav_contact_enter": {
+     "hash": "#contact",
+     "contact_top": 80
+    }
+   }
+  }
+ },
+ "mobile_device": {
+  "device": "iPhone 13 profile (WebKit)",
+  "overflow": 0,
+  "small_targets": [
+   "CV",
+   "How DNS Helps My Portfolio Loa"
+  ]
+ }
+}

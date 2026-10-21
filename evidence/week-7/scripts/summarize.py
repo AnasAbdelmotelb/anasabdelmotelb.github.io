@@ -23,6 +23,8 @@ def cell(f):
         parts.append(f["status"].split(":")[0])
     elif f.get("invalid"):
         parts.append("blocked: " + f["invalid"][0][:60].replace("|", "/"))
+    if "exact_status_ok" in f:
+        parts.append("exact text " + ("OK" if f["exact_status_ok"] else "MISMATCH"))
     if f.get("dialogs"):
         parts.append("DIALOG " + str(f["dialogs"]))
     if f.get("page_errors"):

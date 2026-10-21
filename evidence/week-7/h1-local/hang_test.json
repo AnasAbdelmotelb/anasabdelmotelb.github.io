@@ -1,0 +1,26 @@
+{
+ "chromium": {
+  "after_seconds": 20,
+  "button": "Send message",
+  "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+  "message_kept": "Hang test.",
+  "requests_held": 1,
+  "exact_status_ok": true
+ },
+ "firefox": {
+  "after_seconds": 20,
+  "button": "Send message",
+  "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+  "message_kept": "Hang test.",
+  "requests_held": 1,
+  "exact_status_ok": true
+ },
+ "webkit": {
+  "after_seconds": 20,
+  "button": "Send message",
+  "status": "error: Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn.",
+  "message_kept": "Hang test.",
+  "requests_held": 1,
+  "exact_status_ok": true
+ }
+}

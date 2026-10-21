@@ -316,6 +316,7 @@ const skillGroups = [
       </form>
       <p class="form-note">
         Messages are delivered through Formspree. Your details are only used to reply to you.
+        Formspree's spam filter may block messages that contain code or HTML, so please send plain text.
       </p>
     </div>
   </section>
@@ -376,8 +377,8 @@ const skillGroups = [
       } catch {
         showStatus(
           'error',
-          'Sorry, your message could not be sent. Please try again (if it contains code or HTML, remove that first), ' +
-            'or reach me through <a href="https://cal.com/anas-mansour/intro-call" rel="noopener noreferrer" target="_blank">Book a Call</a> ' +
+          "Sorry, I couldn't send your message. Please try again, or contact me through " +
+            '<a href="https://cal.com/anas-mansour/intro-call" rel="noopener noreferrer" target="_blank">Book a Call</a> ' +
             'or <a href="https://www.linkedin.com/in/anas-mansour-b17302251/" rel="me noopener" target="_blank">LinkedIn</a>.',
         );
       } finally {
