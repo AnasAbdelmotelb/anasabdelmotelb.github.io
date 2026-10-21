@@ -6,6 +6,7 @@
 | **Repository** | https://github.com/AnasAbdelmotelb/anasabdelmotelb.github.io |
 | **Test dates** | First pass 18 October 2026 (fixes in commit `d64cc96`); full re-test, new fixes and this report **20 October 2026**; H1 corrected after peer review **21 October 2026** (commit `cd369c2`) |
 | **Author** | Anas Mansour, with Claude Code (AI assistant) running the automated tests |
+| **Peer reviewer** | Salma Anwar — 21 October 2026 review of commit `73b7d71`, this report and timeout evidence. The final H1 fix in `cd369c2` has not yet received a separate human re-review. |
 
 ## 1. Scope and testing environment
 
@@ -179,11 +180,11 @@ Evidence for F6–F7: `earlier-2026-10-18/F7-cloudflare-block-after-submit.png`,
 
 **Who reviewed:**
 - **AI review (20 Oct):** Claude Code (an AI assistant) did an adversarial review of the diff in `e7ac058` (F9, F10, H1, README). The table below is that review.
-- **Peer review (21 Oct):** an independent peer reviewer reviewed the public source at `73b7d71`, this report and the timeout evidence. They did not access the Formspree or Search Console accounts. Their findings:
+- **Peer review (21 Oct) — Salma Anwar:** Salma reviewed the public source at `73b7d71`, this report and the timeout evidence. She did not access the Formspree or Search Console accounts. Her findings:
   - F9 is supported by the source and evidence; F10 is reported fixed, and nothing contradicts it.
   - **H1 still needed correcting**, because the error still gave code/HTML advice for timeouts, network errors, 403 and 422. I agreed, fixed it in `cd369c2` with exact-wording tests, and verified it live (section 9).
   - Remaining limitations: K2, K3, K5, K6, K7 and K11; the untested server-side honeypot; the X and WhatsApp previews. These match section 4.
-- **Not yet reviewed:** the H1 fix in `cd369c2` has not been re-reviewed by a person yet.
+- **Final H1 re-review pending:** Salma's 21 October review identified the remaining wording issue in the earlier change (`e7ac058`). The final fix in `cd369c2` passed the documented automated tests and live verification (section 9), but no person has re-reviewed that final commit yet.
 
 Earlier, a peer reviewer reviewed the 18 October fixes on 19 October. Their verdict was a conditional pass: one must-fix (CV education wording), which was resolved and deployed in commit `da864b9`, and the limits K2, K7 and K6 accepted as known.
 
@@ -265,7 +266,7 @@ They stay in my private assignment folder. The Search Console statuses are quote
 | Speed check with Google PageSpeed Insights, mobile and desktop, with date | ✓ section 5 |
 | Triage into Fix now and Known limitations | ✓ sections 3 and 4 |
 | Fix-nows fixed and re-tested | ✓ F1–F10 and H1, with before/after evidence |
-| Hardening review, labelled honestly | ✓ section 7 (AI review on 20 Oct; independent peer review on 21 Oct, with its H1 finding fixed and verified live) |
+| Hardening review, labelled honestly | Section 7 records the AI review and Salma Anwar's peer review on 21 Oct. Her H1 finding was fixed and verified live in `cd369c2`; a human re-review of that final commit remains pending. |
 | Honest "where it breaks" list with evidence | ✓ section 2, with the evidence index in section 8 |
 | No invented scores, results or claims about Google | ✓ The sitemap is reported as *not* processed (K5); indexing is shown only where Google showed it |
 | Not done honestly | Formspree's server-side honeypot filtering was not tested (it would need a real submission). X and WhatsApp share previews were not checked (LinkedIn's was, on 19 Oct). The final H1 fix has not been re-reviewed by a person. The Formspree Spam folder (K11) still needs a manual check in the account |
