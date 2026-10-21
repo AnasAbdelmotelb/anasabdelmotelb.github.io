@@ -4,7 +4,7 @@
 |---|---|
 | **Portfolio** | https://anasabdelmotelb.github.io/ |
 | **Repository** | https://github.com/AnasAbdelmotelb/anasabdelmotelb.github.io |
-| **Test dates** | First pass 18 October 2026 (fixes in commit `d64cc96`); full re-test, new fixes and this report **20 October 2026** |
+| **Test dates** | First pass 18 October 2026 (fixes in commit `d64cc96`); full re-test, new fixes and this report **20 October 2026**; H1 corrected after peer review **21 October 2026** (commit `cd369c2`) |
 | **Author** | Anas Mansour, with Claude Code (AI assistant) running the automated tests |
 
 ## 1. Scope and testing environment
@@ -65,7 +65,7 @@ Severity:
 | 13 | Success state (mock 200) | "Thanks, your message was sent. I will reply by email."; form cleared; still on the site | Pass | same |
 | 14 | Failure: mock 422, Cloudflare-style 403 (HTML, no CORS header) and network failure | Error message with Book a Call and LinkedIn links; **visitor's text kept**; still on the site; button usable again | Pass | same |
 | 15 | **Stalled request: Formspree never answers** | Button stuck on **"Sending…" (disabled) for the whole 25 s test, with no message**. The visitor cannot retry or tell what happened | **Medium, fixed (F9)** | `live-before/hang_test.json` |
-| 16 | Wording of the error message for timeouts or network errors | Always said "If it contains code or HTML, remove it", even when the cause was the network | **Low, fixed (H1)** | found in the hardening review (section 6) |
+| 16 | Wording of the error message for timeouts or network errors | Always said "If it contains code or HTML, remove it", even when the cause was the network | **Low, fixed (H1)** | found in the hardening review (section 7); the first rewording still had the code/HTML advice, and the peer review on 21 Oct caught it. Fixed in `cd369c2` |
 | 17 | Spam honeypot `_gotcha` | Hidden (`display:none`, `aria-hidden`), `tabindex=-1`, never reached by Tab, and **sent empty** with every legitimate message, so it does not block real visitors. Formspree's server-side filtering of a *filled* honeypot was not tested, because that would mean a real submission | Pass (client side) | `honeypot` in `results.json` |
 | 18 | Internal links and assets (15) | All return 200 with the right type: pages are `text/html`, `cv.pdf` and the Tech Docs PDF are `application/pdf`, plus the favicon and CSS. Every in-page `#anchor` has a matching target | Pass | `link-check-live.tsv`, `missing_fragment_targets: []` |
 | 19 | External destinations, fetched and checked by page title | Cal.com "15-Minute Intro Call with Anas"; GitHub profile `AnasAbdelmotelb`; repo `SpotFake_Project`; MDN "HTTP caching" | Pass | `link-check-live.tsv` |
@@ -103,7 +103,7 @@ Evidence for F6–F7: `earlier-2026-10-18/F7-cloudflare-block-after-submit.png`,
 | F1–F8 | See 2b. Main changes:<br>• share image and Open Graph/Twitter tags (F1);<br>• `robots.txt` and `@astrojs/sitemap` (F2);<br>• custom `404.astro` with `noindex` (F3);<br>• Person JSON-LD (F4);<br>• form script: trimming, single send, background send with status messages (F5–F7);<br>• contrast fix (F8) | `d64cc96` (18 Oct) | Verified live on 18 October in all three engines. Two approved real messages: the plain one arrived; the `<script>` one was refused and the visitor kept their text. All of today's re-test rows 1–14 and 17–28 confirm these fixes still hold on the live site |
 | **F9** | `src/pages/index.astro`: the form request now uses an `AbortController` and is cancelled after 15 s; the existing error message is shown, the visitor's text is kept and the button works again. The timer is cleared in `finally`, so it cannot affect a later send | this commit | **Before** (live, 25 s wait): stuck on "Sending…" in Chromium, Firefox and WebKit. **After** (local build, 20 s wait): error shown, button reads "Send message", text kept, in all three engines (`local-after/hang_test.json`) |
 | **F10** | `src/pages/projects/tech-docs.astro`: the MDN Cache-Control link now points to its current address | this commit | The new URL returns 200 with no redirect; page title "Cache-Control header - HTTP \| MDN" |
-| **H1** | Error message reworded to "Sorry, your message could not be sent. Please try again (if it contains code or HTML, remove that first), or reach me through Book a Call or LinkedIn." It is now correct for timeouts, network errors and Formspree's code filter | this commit | Shown for 422, 403, network failure and timeout in all three engines (`local-after/results.json`, `local-after/hang_test.json`) |
+| **H1** | **First attempt (20 Oct, `e7ac058`), not enough:** the error became "…Please try again (if it contains code or HTML, remove that first)…". That still gave code/HTML advice for timeouts, network errors and 422s, which the peer review on 21 Oct correctly flagged.<br>**Final fix (21 Oct, `cd369c2`):** one neutral error for every failure: "Sorry, I couldn't send your message. Please try again, or contact me through Book a Call or LinkedIn." The code/HTML tip moved to the note under the form, which every visitor sees before sending: "Formspree's spam filter may block messages that contain code or HTML, so please send plain text." | `cd369c2` | New **exact-wording** Playwright assertions (status text, both contact links, visitor's text kept) for **timeout, network failure, HTTP 403 and HTTP 422**, plus exact success text, in Chromium, Firefox and WebKit. All pass locally (`h1-local/`) and **on the live site after deploy** (`h1-live/`, section 9) |
 | Docs | README lists the 15-second timeout | this commit | — |
 
 **Regression check after the fixes:** the full suite was re-run against the fixed local build (`local-after/summary.md`). All 22 form cases, the honeypot checks, all 24 page × engine × viewport checks and the keyboard checks give the same results as the live baseline. The only differences are the new error wording and the fixed hang case. Live results after deploy are in section 9.
@@ -177,13 +177,19 @@ Evidence for F6–F7: `earlier-2026-10-18/F7-cloudflare-block-after-submit.png`,
 
 ## 7. Hardening review
 
-**Who reviewed:** Claude Code (an AI assistant) did an adversarial review of today's diff (F9, F10, H1, README) on 20 October 2026. **No human mentor reviewed today's changes.**
+**Who reviewed:**
+- **AI review (20 Oct):** Claude Code (an AI assistant) did an adversarial review of the diff in `e7ac058` (F9, F10, H1, README). The table below is that review.
+- **Peer review (21 Oct):** an independent peer reviewer reviewed the public source at `73b7d71`, this report and the timeout evidence. They did not access the Formspree or Search Console accounts. Their findings:
+  - F9 is supported by the source and evidence; F10 is reported fixed, and nothing contradicts it.
+  - **H1 still needed correcting**, because the error still gave code/HTML advice for timeouts, network errors, 403 and 422. I agreed, fixed it in `cd369c2` with exact-wording tests, and verified it live (section 9).
+  - Remaining limitations: K2, K3, K5, K6, K7 and K11; the untested server-side honeypot; the X and WhatsApp previews. These match section 4.
+- **Not yet reviewed:** the H1 fix in `cd369c2` has not been re-reviewed by a person yet.
 
 Earlier, a peer reviewer reviewed the 18 October fixes on 19 October. Their verdict was a conditional pass: one must-fix (CV education wording), which was resolved and deployed in commit `da864b9`, and the limits K2, K7 and K6 accepted as known.
 
 | # | Question asked | Finding | Disposition |
 |---|---|---|---|
-| H1 | Is any message misleading? | Yes: after a timeout or network error, the error told the visitor to remove code or HTML | **Fixed** (reworded; verified in 3 engines) |
+| H1 | Is any message misleading? | Yes: after a timeout or network error, the error told the visitor to remove code or HTML | **Fixed in `cd369c2`** after the peer review showed the 20 Oct rewording was not enough (see section 3) |
 | H2 | Can the timeout cause a wrong "failed" when the message actually arrived? | Yes, if Formspree accepts the message but answers after more than 15 s | **Accepted** as K8 |
 | H3 | Can a timeout from one send cancel a later send? | No: each send creates its own `AbortController`, and `clearTimeout` runs in `finally` | No action |
 | H4 | Does the success message ever appear without a 2xx response? | No: success is shown only after `response.ok`. Mocks returning 403, 422, a network error or no answer all show the error | No action |
@@ -208,7 +214,9 @@ All paths are relative to `evidence/week-7/` in this repository.
 | `live-before/hang_test.json` | F9 before: stuck on "Sending…" after 25 s, 3 engines |
 | `live-before/screenshots/` | 24 page screenshots (3 engines × 2 viewports × 4 pages) plus the iPhone 13 profile |
 | `local-after/results.json`, `local-after/summary.md`, `local-after/hang_test.json` | Same suite on the fixed local build (screenshots not kept; they duplicate the live ones) |
-| `live-after/` | Same suite, stall test and link check on the live site after deploy (section 9) |
+| `live-after/` | Same suite, stall test and link check on the live site after the `e7ac058` deploy (section 9) |
+| `h1-local/`, `h1-live/` | H1 re-test with exact-wording checks: on the local build, then on the live site after the `cd369c2` deploy (`results.json`, `summary.md`, `hang_test.json`) |
+| `h1-live/h1-error-state-live.png` | The live form showing the new error, with the reply mocked as 403, plus the code/HTML note under the form |
 | `link-check-live.tsv` | Status, content type and final URL of every link |
 | `sitemap-check.txt` | Headers, bodies, XSD validation and URL checks for the sitemap and robots.txt |
 | `pagespeed-2026-10-20.json`, `screenshots/pagespeed-*.jpg` | PageSpeed Insights results |
@@ -236,6 +244,17 @@ They stay in my private assignment folder. The Search Console statuses are quote
 | Not deployed | `/reports/…` and `/evidence/…` return 404 on the live site, as intended |
 | Sitemap | Unchanged by this deploy: the live `sitemap-0.xml` is byte-identical to the one checked earlier. The Search Console status is still K5 |
 
+**H1 correction, 21 October 2026:**
+
+| Step | Result |
+|---|---|
+| Commit | `cd369c2` "H1: neutral form error message; code/HTML tip moved to the form note", pushed to `main` |
+| Deploy | GitHub Actions run **17** for `cd369c2`: **completed, success** |
+| Live code | The live homepage contains the new error text and the new note; the old phrase "remove that first" no longer appears (curl) |
+| Exact wording on live | `h1-live/results.json` (15:11 UTC): 11 exact-text checks per engine (8 success cases; 422, 403 and network failure), all passing in Chromium, Firefox and WebKit. On every error the visitor's text is kept and the status links go to Cal.com and LinkedIn |
+| Timeout on live | `h1-live/hang_test.json`: after 20 s, the exact new error, the button back to "Send message" and the text kept, in all three engines |
+| Regression | `h1-live/summary.md`: every other form case, the honeypot, all page × engine × viewport checks and the keyboard checks match the earlier runs. No dialogs, JS errors or overflow. Formspree was mocked throughout, and **no real messages were sent** |
+
 ## 10. Checklist against the assignment
 
 | Requirement | Status |
@@ -246,7 +265,7 @@ They stay in my private assignment folder. The Search Console statuses are quote
 | Speed check with Google PageSpeed Insights, mobile and desktop, with date | ✓ section 5 |
 | Triage into Fix now and Known limitations | ✓ sections 3 and 4 |
 | Fix-nows fixed and re-tested | ✓ F1–F10 and H1, with before/after evidence |
-| Hardening review, labelled honestly | ✓ section 7 (AI review today; earlier peer review stated separately) |
+| Hardening review, labelled honestly | ✓ section 7 (AI review on 20 Oct; independent peer review on 21 Oct, with its H1 finding fixed and verified live) |
 | Honest "where it breaks" list with evidence | ✓ section 2, with the evidence index in section 8 |
 | No invented scores, results or claims about Google | ✓ The sitemap is reported as *not* processed (K5); indexing is shown only where Google showed it |
-| Not done honestly | Formspree's server-side honeypot filtering was not tested (it would need a real submission). X and WhatsApp share previews were not checked (LinkedIn's was, on 19 Oct) |
+| Not done honestly | Formspree's server-side honeypot filtering was not tested (it would need a real submission). X and WhatsApp share previews were not checked (LinkedIn's was, on 19 Oct). The final H1 fix has not been re-reviewed by a person. The Formspree Spam folder (K11) still needs a manual check in the account |
