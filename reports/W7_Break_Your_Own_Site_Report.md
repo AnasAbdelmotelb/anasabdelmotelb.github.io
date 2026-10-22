@@ -7,6 +7,7 @@
 | **Test dates** | First pass 18 October 2026 (fixes in commit `d64cc96`); full re-test, new fixes and this report **20 October 2026**; H1 corrected after peer review **21 October 2026** (commit `cd369c2`) |
 | **Author** | Anas Mansour, with Claude Code (AI assistant) running the automated tests |
 | **Peer reviewer** | Salma Anwar — 21 October 2026 review of commit `73b7d71`, this report and timeout evidence. The final H1 fix in `cd369c2` has not yet received a separate human re-review. |
+| **Follow-up technical reviewer (AI)** | ChatGPT (OpenAI), explicitly an AI reviewer — 22 October 2026. Reviewed `cd369c2`, the form handler, test scripts and published H1 evidence. Technical result: **pass for H1**; this does not replace human sign-off (section 7). |
 
 ## 1. Scope and testing environment
 
@@ -124,6 +125,7 @@ Evidence for F6–F7: `earlier-2026-10-18/F7-cloudflare-block-after-submit.png`,
 | K9 | GitHub Pages sets a 10-minute cache (`max-age=600`) | Changes can take up to 10 minutes to appear | Platform limit on free GitHub Pages |
 | K10 | No field data in PageSpeed Insights | Scores are lab tests only | Real-user data (CrUX) needs more traffic |
 | K11 | Formspree's Spam folder shows 2 messages that I have not reviewed | A real message could have been marked as spam | I will check the Spam folder in the Formspree dashboard |
+| K12 | Fresh `npm audit` on 22 October reports 4 high-severity dependency entries (`http-cache-semantics`, `sharp`, `source-map-js`, `vite`) in the unchanged lockfile | Requires a separate build-tool dependency assessment; no public-site exploit was demonstrated by this audit | Preserve `harness-2026-10-22/npm-audit.json`; evaluate compatible updates separately. No dependency versions were changed in this continuation |
 
 ## 5. SEO, metadata and speed
 
@@ -184,7 +186,10 @@ Evidence for F6–F7: `earlier-2026-10-18/F7-cloudflare-block-after-submit.png`,
   - F9 is supported by the source and evidence; F10 is reported fixed, and nothing contradicts it.
   - **H1 still needed correcting**, because the error still gave code/HTML advice for timeouts, network errors, 403 and 422. I agreed, fixed it in `cd369c2` with exact-wording tests, and verified it live (section 9).
   - Remaining limitations: K2, K3, K5, K6, K7 and K11; the untested server-side honeypot; the X and WhatsApp previews. These match section 4.
-- **Final H1 re-review pending:** Salma's 21 October review identified the remaining wording issue in the earlier change (`e7ac058`). The final fix in `cd369c2` passed the documented automated tests and live verification (section 9), but no person has re-reviewed that final commit yet.
+- **Follow-up AI technical review (22 Oct) — ChatGPT (OpenAI), an AI reviewer:** Independently reviewed commit `cd369c2`, `src/pages/index.astro`, `break_tests.py`, `hang_test.py`, and the published `h1-local`/`h1-live` evidence. **Technical finding: pass for the H1 implementation on the reviewed automated/live evidence.** The handler uses a neutral error for timeout, network, 403 and 422 failures, keeps the code/HTML advice in a separate note, retains the message on failure, keeps both alternative contact links, and clears the timeout and restores the button in `finally`. The historical H1 results contain 11 passing exact-status checks per engine and passing stalled-request results across Chromium, Firefox and WebKit. Fresh checks on 22 Oct found the live homepage byte-identical to the locally built homepage. **Harness finding confirmed:** both scripts previously recorded `exact_status_ok` without failing on a false value. The continuation adds explicit failure summaries after saving evidence, rejects missing required form checks or wrong request counts, checks button recovery, and checks both timeout contact links. This is a test-runner reliability correction, not a failure of the H1 product fix. The new validation evidence is indexed below. **This AI review does not replace human sign-off.**
+- **Final H1 re-review pending:** Salma's 21 October review identified the remaining wording issue in the earlier change (`e7ac058`). The final fix in `cd369c2` passed the documented automated tests, live verification (section 9) and the separate AI technical review, but no person has re-reviewed that final commit yet.
+
+**Official brief:** the supplied `Requirements.pdf` asks for a mentor or structured peer hardening review and says that review must have happened and its must-fixes must be addressed. It does not explicitly require a second review of each fix. Salma’s review and the H1 correction are documented separately; no final human approval is inferred.
 
 Earlier, a peer reviewer reviewed the 18 October fixes on 19 October. Their verdict was a conditional pass: one must-fix (CV education wording), which was resolved and deployed in commit `da864b9`, and the limits K2, K7 and K6 accepted as known.
 
@@ -217,6 +222,7 @@ All paths are relative to `evidence/week-7/` in this repository.
 | `local-after/results.json`, `local-after/summary.md`, `local-after/hang_test.json` | Same suite on the fixed local build (screenshots not kept; they duplicate the live ones) |
 | `live-after/` | Same suite, stall test and link check on the live site after the `e7ac058` deploy (section 9) |
 | `h1-local/`, `h1-live/` | H1 re-test with exact-wording checks: on the local build, then on the live site after the `cd369c2` deploy (`results.json`, `summary.md`, `hang_test.json`) |
+| `harness-2026-10-22/` | Fresh local regression and stalled-request results, failure-exit negative controls, validation commands and dependency audit. Historical evidence is unchanged; duplicate screenshots remain local. |
 | `h1-live/h1-error-state-live.png` | The live form showing the new error, with the reply mocked as 403, plus the code/HTML note under the form |
 | `link-check-live.tsv` | Status, content type and final URL of every link |
 | `sitemap-check.txt` | Headers, bodies, XSD validation and URL checks for the sitemap and robots.txt |
@@ -256,6 +262,8 @@ They stay in my private assignment folder. The Search Console statuses are quote
 | Timeout on live | `h1-live/hang_test.json`: after 20 s, the exact new error, the button back to "Send message" and the text kept, in all three engines |
 | Regression | `h1-live/summary.md`: every other form case, the honeypot, all page × engine × viewport checks and the keyboard checks match the earlier runs. No dialogs, JS errors or overflow. Formspree was mocked throughout, and **no real messages were sent** |
 
+**Continuation validation, 22 October 2026 (ChatGPT, AI):** No website code changed. Both test runners now fail on required assertion failures after preserving results. The full local suite exited 0: 66 form cases, 36 exact-status checks, 24 page observations, keyboard checks and the iPhone 13 profile. The 20-second stall check passed in all three engines. Temporary copies with intentionally wrong error wording both exited 1 with `AssertionError`, proving failure propagation. Formspree was mocked throughout. The build passed and the live homepage was byte-identical to the local build. See `harness-2026-10-22/README.md` for commands, evidence, observation limits and the dependency-audit follow-up. Baseline deployment was verified through the GitHub API: main `7cf680a`, run 19 success; run 18 belongs to `2f1ccc0`; H1 run 17 success. Publication of this continuation must be verified against its actual new commit; the baseline results are not a claim about that future run.
+
 ## 10. Checklist against the assignment
 
 | Requirement | Status |
@@ -266,7 +274,7 @@ They stay in my private assignment folder. The Search Console statuses are quote
 | Speed check with Google PageSpeed Insights, mobile and desktop, with date | ✓ section 5 |
 | Triage into Fix now and Known limitations | ✓ sections 3 and 4 |
 | Fix-nows fixed and re-tested | ✓ F1–F10 and H1, with before/after evidence |
-| Hardening review, labelled honestly | Section 7 records the AI review and Salma Anwar's peer review on 21 Oct. Her H1 finding was fixed and verified live in `cd369c2`; a human re-review of that final commit remains pending. |
+| Hardening review, labelled honestly | Section 7 records Claude’s AI review, Salma Anwar's peer review on 21 Oct, and ChatGPT’s separate AI technical review on 22 Oct. Her H1 finding was fixed and verified live in `cd369c2`; a human re-review of that final commit remains pending. |
 | Honest "where it breaks" list with evidence | ✓ section 2, with the evidence index in section 8 |
 | No invented scores, results or claims about Google | ✓ The sitemap is reported as *not* processed (K5); indexing is shown only where Google showed it |
 | Not done honestly | Formspree's server-side honeypot filtering was not tested (it would need a real submission). X and WhatsApp share previews were not checked (LinkedIn's was, on 19 Oct). The final H1 fix has not been re-reviewed by a person. The Formspree Spam folder (K11) still needs a manual check in the account |

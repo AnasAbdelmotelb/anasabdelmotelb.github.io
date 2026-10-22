@@ -1,0 +1,14 @@
+[
+  {
+    "script": "break_tests.py",
+    "mutation": "EXPECTED_ERROR intentionally wrong; production files unchanged",
+    "exit_code": 1,
+    "assertion_error": true
+  },
+  {
+    "script": "hang_test.py",
+    "mutation": "EXPECTED_ERROR intentionally wrong; production files unchanged",
+    "exit_code": 1,
+    "assertion_error": true
+  }
+]

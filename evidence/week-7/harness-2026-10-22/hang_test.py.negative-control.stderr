@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/private/tmp/flyrank-negative-controls/hang_test.py", line 31, in <module>
+    raise AssertionError("Stalled-request assertions failed: " + ", ".join(failures))
+AssertionError: Stalled-request assertions failed: chromium, firefox, webkit

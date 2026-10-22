@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/private/tmp/flyrank-negative-controls/break_tests.py", line 303, in <module>
+    main()
+    ~~~~^^
+  File "/private/tmp/flyrank-negative-controls/break_tests.py", line 299, in main
+    raise AssertionError("\n".join(failures))
+AssertionError: chromium: valid, server returns 422: exact status, links or retained text failed/missing
+chromium: valid, Cloudflare-style 403 block: exact status, links or retained text failed/missing
+chromium: valid, network failure: exact status, links or retained text failed/missing

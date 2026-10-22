@@ -161,7 +161,8 @@ def form_tests(browser):
     page.wait_for_timeout(100)
     page.focus("#contact-email"); page.keyboard.press("Enter"); page.keyboard.press("Enter")
     settle(page, held, "ok")
-    res.append({"case": "click then Enter twice while sending", "requests_sent": len(log), **form_state(page)})
+    res.append({"case": "click then Enter twice while sending", "requests_sent": len(log), **form_state(page),
+                **check_status(page, "ok", VALID["message"].strip())})
     ctx.close()
     # JavaScript disabled
     res.append(form_case(browser, "JS off: empty submit", {}, js=False))
@@ -271,6 +272,31 @@ def main():
         results["mobile_device"] = mobile_device_test(p)
     (OUT / "results.json").write_text(json.dumps(results, indent=1, ensure_ascii=False))
     print("wrote", OUT / "results.json")
+    # Save all observations before failing, so a failed run still has useful evidence.
+    failures = []
+    blocked = {c[0] for c in FORM_CASES[:5]} | {"whitespace-only name", "whitespace-only message",
+               "JS off: empty submit", "JS off: whitespace-only name"}
+    expected_cases = [c[0] for c in FORM_CASES] + ["click then Enter twice while sending",
+        "JS off: empty submit", "JS off: whitespace-only name", "JS off: whitespace-only message (known gap)"]
+    for eng in ENGINES:
+        forms = results["engines"][eng]["form"]
+        if [r["case"] for r in forms] != expected_cases:
+            failures.append(f"{eng}: missing or unexpected form cases")
+        for r in forms:
+            label = f"{eng}: {r['case']}"
+            expected_requests = 0 if r["case"] in blocked else 1
+            if r["requests_sent"] != expected_requests:
+                failures.append(f"{label}: expected {expected_requests} mocked request(s)")
+            if expected_requests and not r["case"].startswith("JS off:"):
+                if r.get("exact_status_ok") is not True:
+                    failures.append(f"{label}: exact status, links or retained text failed/missing")
+                if r.get("button") != "Send message":
+                    failures.append(f"{label}: submit button not restored")
+            if r.get("dialogs") or r.get("page_errors"):
+                failures.append(f"{label}: unexpected dialog or JavaScript error")
+    print("required form assertions:", "FAIL" if failures else "PASS", flush=True)
+    if failures:
+        raise AssertionError("\n".join(failures))
 
 
 if __name__ == "__main__":
