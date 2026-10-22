@@ -38,7 +38,7 @@ Both subprocesses returned **exit 1 with AssertionError**, as required. See `fai
 
 ## Repository, deployment and live baseline
 
-`verified-baseline.json` records the public API check: main `7cf680a`, Actions runs 15–19 completed successfully, including H1 run 17 and latest run 19. Run 18 belongs to `2f1ccc0`. A dry-run push returned “Everything up-to-date”; publication of this continuation is verified separately after the real push.
+`verified-baseline.json` records the public API check: main `7cf680a`, Actions runs 15–19 completed successfully, including H1 run 17 and latest run 19. Run 18 belongs to `2f1ccc0`. The real push published `d7ddd895c1df1fe11312d130ecc19d7861f779a5`; GitHub Actions run 20 completed successfully and the GitHub-hosted report matched the committed file. See `deployment-verification.json`. A subsequent documentation-only commit records that verified result.
 
 On 22 October the live homepage was byte-identical to the locally built homepage (SHA-256 in the JSON). Its minified code contains the 15-second abort, neutral H1 error, separate code/HTML note and timeout cleanup. Public sitemap and robots files were reachable and listed the intended three pages. These are fresh public checks, not a new live browser suite, speed measurement, search-index check or private Search Console inspection. Historical `h1-local`/`h1-live` evidence remains unchanged.
 
